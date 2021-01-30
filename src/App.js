@@ -1,9 +1,8 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
+import Navbar from './Navbar';
 
 const App = () => {
-	<Router>
-		
-	</Router>
+	<Navbar />
 }
 export default App;
