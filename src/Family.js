@@ -1,8 +1,10 @@
 import React from 'react';
+import Navbar from './Navbar';
 
 const Family = () => {
     return (
     <div>
+      <Navbar />
     <h2>Family 1</h2>
       <table>
         <thead>

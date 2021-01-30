@@ -5,6 +5,8 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Navbar from './Navbar';
+
 
 const user = 'Shane' //Pull user's name from the database
 
@@ -12,6 +14,7 @@ const user = 'Shane' //Pull user's name from the database
 const AccountSettings = () => {
   return (
     <div>
+      <Navbar />
       <table>
         <thead>
           <tr>

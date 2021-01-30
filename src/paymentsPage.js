@@ -1,4 +1,5 @@
 import React from 'react'
+import Navbar from './Navbar';
 
 //Show payment table
 //Edit a card
@@ -8,6 +9,7 @@ import React from 'react'
 const PaymentPage = () => {
   return (
     <div>
+      <Navbar/>
       <table>
         <thead>
           <tr>

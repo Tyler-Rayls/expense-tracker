@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Navbar from './Navbar';
 
 const user = 'Shane' //Pull user's name from the database
 
@@ -14,6 +15,7 @@ const user = 'Shane' //Pull user's name from the database
 const UserHome = () => {
   return (
         <div>
+          <Navbar/>
           <h3>Welcome, {user}</h3>
           <ul><Link to="/transactions"> Manage your transactions </Link></ul>  
           <ul><Link to="/payments">Manage your payment methods</Link></ul>
