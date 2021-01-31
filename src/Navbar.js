@@ -1,10 +1,9 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-import Home from './Home';
+import Login from './Login/Main';
 import Expenses from './Expenses';
 import Family from './Family';
 import AccountSettings from './AccountSettingsPage';
-import Login from './Login';
 
 const Navbar = () => {
     return (
@@ -45,7 +44,7 @@ const Navbar = () => {
                    <AccountSettings/>
                 </Route>
                 <Route path="/">
-                    <Home />
+                    <Login />
                 </Route>
             </Switch>
         </Router>
