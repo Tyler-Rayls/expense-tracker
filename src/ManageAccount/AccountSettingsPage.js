@@ -7,7 +7,7 @@ import UserInfoTable from './userInfoTable';
 //Edit transaction URL to match Tyler
 const AccountSettings = () => {
   return (
-    <div>
+    <div className="container">
       <PaymentMethodTable/>
       <br/>
       <UserInfoTable/>
