@@ -9,7 +9,9 @@ const AccountSettings = () => {
   return (
     <div>
       <PaymentMethodTable/>
+      <br/>
       <UserInfoTable/>
+      <br/>
       <button>Delete Account</button>
     </div>  
 

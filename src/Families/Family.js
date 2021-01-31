@@ -29,6 +29,8 @@ const Family = () => {
       <button>
         Leave Family
       </button>
+      <br/>
+      <br/>
       <h2>Family 2</h2>
       <table class="table table-sm">
         <thead>
@@ -55,17 +57,8 @@ const Family = () => {
       <button>
         Leave Family
       </button>
-
-      <h4>Join a new family:</h4>
-      <form>
-        <label>
-          Input family ID:&nbsp;
-          <input type="text" name="surname" />
-        </label>
-        &nbsp;
-        <input type="submit" value="Submit" />
-      </form>
-
+    <br/>
+    <br/>
       <h4>Create a new family:</h4>
       <form>
         <label>
@@ -75,7 +68,22 @@ const Family = () => {
         &nbsp;
         <input type="submit" value="Submit" />
       </form>
+      <br/>
+      <h4>Search existing families:</h4>
+      <form>
+        <label>
+          Input family ID:&nbsp;
+          <input type="text" name="surname" />
+        </label>
+        &nbsp;
+        <input type="submit" value="Submit" />
+      </form>
+      <br/>
+      <h6>Search results:</h6>
+
+      The result would be displayed here as a table, along with a join button.
     </div>
+
   );
 }
 

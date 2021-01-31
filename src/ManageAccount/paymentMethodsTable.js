@@ -1,4 +1,5 @@
 import React from 'react'
+import AddCardForm from './addCardForm'
 
 const PaymentMethodTable = () => {
     return (
@@ -51,6 +52,7 @@ const PaymentMethodTable = () => {
                 </tr>
                 </tbody>
             </table>
+            <AddCardForm/>
         </div>
     )
 }
