@@ -9,7 +9,6 @@ import Navbar from './Navbar';
 const PaymentPage = () => {
   return (
     <div>
-      <Navbar/>
       <table>
         <thead>
           <tr>

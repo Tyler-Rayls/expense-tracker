@@ -1,43 +1,14 @@
 import React from 'react'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import Navbar from './Navbar';
+import PaymentMethodTable from './paymentMethodsTable';
+import UserInfoTable from './userInfoTable';
 
-
-const user = 'Shane' //Pull user's name from the database
 
 //Edit transaction URL to match Tyler
 const AccountSettings = () => {
   return (
-    <div>
-      <Navbar />
-      <table>
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Password</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Shane</td>
-            <td>Yen</td>
-            <td>totallysecurepassword</td>
-          </tr>
-        </tbody>
-      </table>
-      <button>
-        Edit your Name
-      </button>
-      <button>
-        Change Password
-      </button>
-    </div>
+    <div><PaymentMethodTable/>
+    <UserInfoTable/></div>
+    
   )
 }
 
