@@ -40,10 +40,3 @@ class AddCardForm extends React.Component {
 
   export default AddCardForm;
 
-  //card name
-  //Gas
-  //Grocery
-  //Travel
-  //Dining
-  //Other
-  //Annual Fee

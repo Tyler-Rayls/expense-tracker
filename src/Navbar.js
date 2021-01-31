@@ -2,8 +2,8 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Login from './Login/Main';
 import Expenses from './Expenses/Main';
-import Family from './Family';
-import AccountSettings from './AccountSettingsPage';
+import Family from './Families/Family';
+import AccountSettings from './ManageAccount/AccountSettingsPage';
 
 const Navbar = () => {
     return (

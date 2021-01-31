@@ -1,5 +1,6 @@
 import React from 'react';
 import AddExpense from './AddExpenseForm';
+import CascadingDropdown from './CascadingDropdown';
 import ExpensesTable from './ExpensesTable';
 
 const ExpensesMain = () => {
@@ -17,6 +18,7 @@ const ExpensesMain = () => {
                     <ExpensesTable />
                 </div>
             </div>
+            <CascadingDropdown/>
         </div>
     )
 }
