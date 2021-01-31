@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Login from './Login/Main';
-import Expenses from './Expenses';
+import Expenses from './Expenses/Main';
 import Family from './Family';
 import AccountSettings from './AccountSettingsPage';
 
