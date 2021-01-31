@@ -1,15 +1,13 @@
 import React from 'react';
 
 const Family = () => {
-    return (
+  return (
     <div>
-    <h2>Family 1</h2>
-      <table>
+      <h2>Family 1</h2>
+      <table class="table table-sm">
         <thead>
           <tr>
-            <th></th>
             <th>Family Members</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -32,12 +30,10 @@ const Family = () => {
         Leave Family
       </button>
       <h2>Family 2</h2>
-      <table>
+      <table class="table table-sm">
         <thead>
           <tr>
-            <th></th>
             <th>Family Members</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -59,8 +55,28 @@ const Family = () => {
       <button>
         Leave Family
       </button>
+
+      <h4>Join a new family:</h4>
+      <form>
+        <label>
+          Input family ID:&nbsp;
+          <input type="text" name="surname" />
+        </label>
+        &nbsp;
+        <input type="submit" value="Submit" />
+      </form>
+
+      <h4>Create a new family:</h4>
+      <form>
+        <label>
+          Input surname:&nbsp;
+          <input type="text" name="surname" />
+        </label>
+        &nbsp;
+        <input type="submit" value="Submit" />
+      </form>
     </div>
-    );
+  );
 }
 
 export default Family;
