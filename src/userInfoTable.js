@@ -3,7 +3,7 @@ import React from 'react'
 const UserInfoTable = () => {
     return (
 <div>
-<text>User information</text>
+<h4>User information:</h4>
 
 <table class="table table-sm">
   <thead>

@@ -3,7 +3,7 @@ import React from 'react'
 const PaymentMethodTable = () => {
     return (
         <div>
-            Your payment methods:
+            <h4>Your payment methods:</h4>
             <table class="table table-sm">
                 <thead>
                 <tr>
@@ -25,19 +25,32 @@ const PaymentMethodTable = () => {
                     <td>0%</td>
                     <td>0%</td>
                     <td>$550</td>
+                <button>
+                Edit card
+                </button>
+                &nbsp;
+                <button>
+                Delete card
+                </button>
+                </tr>
+                <tr>
+                    <td>Amazon Prime Rewards Visa</td>
+                    <td>2%</td>
+                    <td>5%</td>
+                    <td>1%</td>
+                    <td>0%</td>
+                    <td>5%</td>
+                    <td>$0</td>
+                <button>
+                Edit card
+                </button>
+                &nbsp;
+                <button>
+                Delete card
+                </button>
                 </tr>
                 </tbody>
             </table>
-            <button>
-                Add a card
-            </button>
-            <button>
-                Edit a card
-            </button>
-            &nbsp;
-            <button>
-                Delete a card
-            </button>
         </div>
     )
 }
