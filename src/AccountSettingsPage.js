@@ -7,7 +7,9 @@ import UserInfoTable from './userInfoTable';
 const AccountSettings = () => {
   return (
     <div><PaymentMethodTable/>
-    <UserInfoTable/></div>
+    <UserInfoTable/>
+    <button>Delete Account</button>
+    </div>
     
   )
 }
