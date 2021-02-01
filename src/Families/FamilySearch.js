@@ -11,7 +11,7 @@ const FamilySearch = () => {
                     <input type="text" name="family" className="" placeholder="Surname"></input>
                 </div>
                 <div className="col-12 text-center">
-                    <button type="button" className="btn btn-success m-2">Search</button>
+                    <button type="button" className="btn btn-primary m-2">Search</button>
                 </div>
             </div>
             <div className="col-12 mb-5">
