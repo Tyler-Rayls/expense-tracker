@@ -1,19 +1,51 @@
-import React from "react";
+import React, {useState} from 'react';
+import Select from "react-select"
+import data from './expenseData.json';
 
-const CascadingDropdown = () => {
-    return (<div>
-<form name="form1" id="form1">
-Filter by: <select name="category" id="category">
-  <option value="" selected="selected">Select filter</option>
-</select>
-<br/>
-Filter options: <select name="options" id="options">
-  <option value="" selected="selected">Select a filter category first</option>
-</select>
-<br></br>
-<input type="submit" value="Filter"/>
-</form></div>
-    )
-}
+function CascadingDropdown() {
+        const [filterCategory, setCategory] = useState(null);
+        const [filterValue, setValue] = useState(null);
+        const [valueList, setValueList] = useState([]);
+       
+        // handle change event of the categories dropdown
+        const handleCategoryChange = (obj) => {
+          setCategory(obj); 
+          setValueList(obj.values);
+          setValue(null);
+        };
+       
+        // handle change event of the value dropdown
+        const handleValueChange = (obj) => {
+          setValue(obj); 
+        };
+       
+        return (
+          <div>
+            <div style={{ width: 400, marginBottom: 20 }}>
+              <b>Filter categories</b>
+              <Select
+                placeholder="Filter by..."
+                value={filterCategory}
+                options={data}
+                onChange={handleCategoryChange}
+                getOptionLabel={x => x.category}
+              />
+              <b>Filter Value</b>
+              <Select
+                placeholder="Filter Options"
+                value={filterValue}
+                options={valueList}
+                onChange={handleValueChange}
+                getOptionLabel={x => x.name}
+              />
+              <br/>
+              <div className="col">
+                <button type="button" className="btn btn-primary">Filter</button>
+                </div>
+            </div>
+          </div>
+        );
+      }
+
 
 export default CascadingDropdown;

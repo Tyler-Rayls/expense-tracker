@@ -1,5 +1,4 @@
 import React from 'react'
-import AddCardForm from './addCardForm';
 import PaymentMethodTable from './paymentMethodsTable';
 import UserInfoTable from './userInfoTable';
 
