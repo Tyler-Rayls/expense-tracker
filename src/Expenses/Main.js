@@ -18,7 +18,7 @@ const ExpensesMain = () => {
                     <ExpensesTable />
                 </div>
             </div>
-            <CascadingDropdown/>
+            <CascadingDropdown />
         </div>
     )
 }
