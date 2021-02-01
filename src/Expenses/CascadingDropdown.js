@@ -21,27 +21,28 @@ function CascadingDropdown() {
        
         return (
           <div>
-            <div style={{ width: 400, marginBottom: 20 }}>
-              <b>Filter categories</b>
-              <Select
-                placeholder="Filter by..."
-                value={filterCategory}
-                options={data}
-                onChange={handleCategoryChange}
-                getOptionLabel={x => x.category}
-              />
-              <b>Filter Value</b>
-              <Select
-                placeholder="Filter Options"
-                value={filterValue}
-                options={valueList}
-                onChange={handleValueChange}
-                getOptionLabel={x => x.name}
-              />
-              <br/>
-              <div className="col">
+            <div className="row justify-content-evenly align-items-end">
+              <div className="col-4">
+                <Select
+                  placeholder="Filter by..."
+                  value={filterCategory}
+                  options={data}
+                  onChange={handleCategoryChange}
+                  getOptionLabel={x => x.category}
+                />
+              </div>
+              <div className="col-4">
+                <Select
+                  placeholder="Filter options..."
+                  value={filterValue}
+                  options={valueList}
+                  onChange={handleValueChange}
+                  getOptionLabel={x => x.name}
+                />
+              </div>
+              <div className="col-2 align-items-center">
                 <button type="button" className="btn btn-primary">Filter</button>
-                </div>
+              </div>
             </div>
           </div>
         );

@@ -1,10 +1,9 @@
 import React from 'react'
-import AddCardForm from './addCardForm'
 
 const PaymentMethodTable = () => {
     return (
-        <div>
-            <h4>Your payment methods:</h4>
+        <div className="col-12 text-center">
+            <h2>Payment Methods</h2>
             <table class="table table-sm">
                 <thead>
                 <tr>
@@ -15,44 +14,35 @@ const PaymentMethodTable = () => {
                     <th>Dining</th>
                     <th>Other</th>
                     <th>Annual Fee</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Chase Sapphire</td>
-                    <td>3%</td>
-                    <td>2%</td>
-                    <td>1%</td>
-                    <td>0%</td>
-                    <td>0%</td>
-                    <td>$550</td>
-                <button>
-                Edit card
-                </button>
-                &nbsp;
-                <button>
-                Delete card
-                </button>
-                </tr>
-                <tr>
-                    <td>Amazon Prime Rewards Visa</td>
-                    <td>2%</td>
-                    <td>5%</td>
-                    <td>1%</td>
-                    <td>0%</td>
-                    <td>5%</td>
-                    <td>$0</td>
-                <button>
-                Edit card
-                </button>
-                &nbsp;
-                <button>
-                Delete card
-                </button>
-                </tr>
+                    <tr>
+                        <td>Chase Sapphire</td>
+                        <td>3%</td>
+                        <td>2%</td>
+                        <td>1%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>$550</td>
+                        <td><button type="button" className="btn btn-success">Edit</button></td>
+                        <td><button type="button" className="btn btn-danger">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Amazon Prime Rewards Visa</td>
+                        <td>2%</td>
+                        <td>5%</td>
+                        <td>1%</td>
+                        <td>0%</td>
+                        <td>5%</td>
+                        <td>$0</td>
+                        <td><button type="button" className="btn btn-success">Edit</button></td>
+                        <td><button type="button" className="btn btn-danger">Delete</button></td>
+                    </tr>
                 </tbody>
             </table>
-            <AddCardForm/>
         </div>
     )
 }
