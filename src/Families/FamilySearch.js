@@ -8,8 +8,7 @@ const FamilySearch = () => {
             </div>
             <div className="row justify-content-center mt-3">
                 <div className="col-12 text-center">
-                    <label for="family" className="input-label d-block">Surname</label>
-                    <input type="text" name="family" className=""></input>
+                    <input type="text" name="family" className="" placeholder="Surname"></input>
                 </div>
                 <div className="col-12 text-center">
                     <button type="button" className="btn btn-success m-2">Search</button>

@@ -6,12 +6,14 @@ import FamilySearch from './FamilySearch';
 const family1 = {
     id: "34987",
     surname: "Chipmunk",
-    members: ["Shane Yen", "Tyler Rayls", "Elon Musk"]
+    members: ["Shane Yen", "Tyler Rayls", "Elon Musk"],
+    total: 2309.97
 }
 const family2 = {
     id: "23569",
     surname: "Tesla",
-    members: ["Shane Yen", "Elon Musk", "Betty White"]
+    members: ["Shane Yen", "Elon Musk", "Betty White"],
+    total: 4506.78
 }
 
 const FamilyMain = () => {
