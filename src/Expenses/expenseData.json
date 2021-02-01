@@ -1,0 +1,80 @@
+[
+    {
+        "category": "Payment Method",
+        "values": [
+            {
+                "name": "Chase Saphhire"
+            },
+            {
+                "name": "Chase Unlimited"
+            },
+            {
+                "name": "Delta SkyMiles Amex"
+            }
+        ]
+    },
+    {
+        "category": "Payment Category",
+        "values": [
+            {
+                "name": "Gas"
+            },
+            {
+                "name": "Grocery"
+            },
+            {
+                "name": "Travel"
+            },
+            {
+                "name": "Dining"
+            },
+            {
+                "name": "Other"
+            },
+            {
+                "name": "None"
+            }
+        ]
+    },
+    {
+        "category": "Month",
+        "values": [
+            {
+                "name": "January"
+            },
+            {
+                "name": "February"
+            },
+            {
+                "name": "March"
+            },
+            {
+                "name": "April"
+            },
+            {
+                "name": "May"
+            },
+            {
+                "name": "June"
+            },
+            {
+                "name": "July"
+            },
+            {
+                "name": "August"
+            },
+            {
+                "name": "September"
+            },
+            {
+                "name": "October"
+            },
+            {
+                "name": "November"
+            },
+            {
+                "name": "December"
+            }
+        ]
+    }
+]
