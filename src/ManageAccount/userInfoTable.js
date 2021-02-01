@@ -2,8 +2,7 @@ import React from 'react'
 
 const UserInfoTable = () => {
     return (
-        <div className="text-center">
-            <h4>User Information</h4>
+        <div className="text-center mt-4">
             <table class="table table-sm">
                 <thead>
                     <tr>

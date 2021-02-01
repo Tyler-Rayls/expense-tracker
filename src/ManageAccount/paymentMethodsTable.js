@@ -2,9 +2,7 @@ import React from 'react'
 
 const PaymentMethodTable = () => {
     return (
-        <div className="col-12 text-center">
-            <h2>Payment Methods</h2>
-            <table class="table table-sm">
+            <table class="table table-sm mt-4 text-center">
                 <thead>
                 <tr>
                     <th>Card Name</th>
@@ -14,7 +12,6 @@ const PaymentMethodTable = () => {
                     <th>Dining</th>
                     <th>Other</th>
                     <th>Annual Fee</th>
-                    <th></th>
                     <th></th>
                 </tr>
                 </thead>
@@ -27,8 +24,7 @@ const PaymentMethodTable = () => {
                         <td>0%</td>
                         <td>0%</td>
                         <td>$550</td>
-                        <td><button type="button" className="btn btn-success">Edit</button></td>
-                        <td><button type="button" className="btn btn-danger">Delete</button></td>
+                        <td><button type="button" className="btn btn-sm btn-danger">Remove</button></td>
                     </tr>
                     <tr>
                         <td>Amazon Prime Rewards Visa</td>
@@ -38,12 +34,10 @@ const PaymentMethodTable = () => {
                         <td>0%</td>
                         <td>5%</td>
                         <td>$0</td>
-                        <td><button type="button" className="btn btn-success">Edit</button></td>
-                        <td><button type="button" className="btn btn-danger">Delete</button></td>
+                        <td><button type="button" className="btn btn-sm btn-danger">Remove</button></td>
                     </tr>
                 </tbody>
             </table>
-        </div>
     )
 }
 
