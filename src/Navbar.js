@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Login from './Login/Main';
 import Expenses from './Expenses/Main';
 import Family from './Families/Main';
+import Register from './Register/Main';
 import AccountSettings from './ManageAccount/AccountSettingsPage';
 
 const Navbar = () => {
@@ -42,6 +43,9 @@ const Navbar = () => {
                 </Route>
                 <Route path="/accountSettings">
                    <AccountSettings/>
+                </Route>
+                <Route path="/register">
+                    <Register />
                 </Route>
                 <Route path="/">
                     <Login />
