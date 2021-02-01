@@ -6,7 +6,7 @@ import Family from './Families/Main';
 import Register from './Register/Main';
 import Rewards from './Rewards/Main';
 import Index from './IndexOfFeatures';
-import AccountSettings from './ManageAccount/AccountSettingsPage';
+import AccountSettings from './ManageAccount/UserProfile';
 
 const Navbar = () => {
     return (
