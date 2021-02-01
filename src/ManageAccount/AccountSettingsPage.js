@@ -1,8 +1,4 @@
 import React from 'react'
-<<<<<<< HEAD
-// import AddCardForm from './addCardForm';
-=======
->>>>>>> origin/master
 import PaymentMethodTable from './paymentMethodsTable';
 import UserInfoTable from './userInfoTable';
 
