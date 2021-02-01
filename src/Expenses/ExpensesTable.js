@@ -19,7 +19,7 @@ const ExpenseTable = () => {
                     <td>1/21/2021</td>
                     <td>Chase Sapphire</td>
                     <td>Gas</td>
-                    <td><button type="button" className="btn btn-success">Edit</button></td>
+                    <td><button type="button" className="btn btn-primary">Edit</button></td>
                     <td><button type="button" className="btn btn-danger">Delete</button></td>
                 </tr>
                 <tr>
@@ -27,7 +27,7 @@ const ExpenseTable = () => {
                     <td>12/30/2020</td>
                     <td>Chase Unlimited</td>
                     <td>Other</td>
-                    <td><button type="button" className="btn btn-success">Edit</button></td>
+                    <td><button type="button" className="btn btn-primary">Edit</button></td>
                     <td><button type="button" className="btn btn-danger">Delete</button></td>
                 </tr>
                 <tr>
@@ -35,7 +35,7 @@ const ExpenseTable = () => {
                     <td>12/20/2020</td>
                     <td>Delta SkyMiles Amex</td>
                     <td>Travel</td>
-                    <td><button type="button" className="btn btn-success">Edit</button></td>
+                    <td><button type="button" className="btn btn-primary">Edit</button></td>
                     <td><button type="button" className="btn btn-danger">Delete</button></td>
                 </tr>
             </tbody>

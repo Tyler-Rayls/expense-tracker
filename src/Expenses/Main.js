@@ -7,16 +7,13 @@ const ExpensesMain = () => {
     return (
         <div className="container w-75">
             <div className="row mt-4">
-                <h2 className="text-center">Add an Expense</h2>
-                <hr />
-                <div className="row mt-2">
+                <h2 className="text-center">Expenses</h2>
+                <hr className="mb-0"/>
+                <div className="row justify-content-center m-2">
                     <AddExpense />
                 </div>
-            </div>
-            <div className="row mt-5">
-                <h2 className="text-center">Expenses</h2>
-                <hr />
-                <div className="row justify-content-evenly mb-3">
+                <hr className="mb-5"/>
+                <div className="row mb-1">
                     <CascadingDropdown />
                 </div>
                 <div className="row mt-2 justify-content-evenly">

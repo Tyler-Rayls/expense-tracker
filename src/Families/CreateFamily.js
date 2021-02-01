@@ -2,18 +2,12 @@ import React from 'react';
 
 const CreateFamily = () => {
     return (
-        <div className="row mt-5 justify-content-center">
-            <div className="row">
-                <h2 className="text-center">Create Family</h2>
-                <hr />
-            </div>
-            <div className="row justify-content-center">
-                <div className="col-12 text-center">
-                    <label for="surname" className="input-label d-block">Surname</label>
-                    <input type="text" name="surname" className=""></input>
-                </div>
-                <div className="col-12 text-center">
-                    <button type="button" className="btn btn-success m-2">Create</button>
+        <div className="col-8 col-md-6 col-lg-4">
+            <div class="card mb-3">
+                <h5 className="card-title card-header text-center">Create a family</h5> 
+                <div class="card-body text-center">
+                    <input type="text" name="surname" className="" placeholder="Surname"></input><br />
+                    <button type="button" className="btn btn-outline-success mt-3"><i class="bi bi-plus-circle"></i> Add</button>
                 </div>
             </div>
         </div>
