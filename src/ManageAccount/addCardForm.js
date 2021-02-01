@@ -4,7 +4,7 @@ class AddCardForm extends React.Component {
     render() {
         return (
             <div className="col-8">
-                <h4>Add New Card</h4>
+                <h4>Add Payment Method</h4>
                 <form>
                     <div className="row">
                         <div className="col-12">

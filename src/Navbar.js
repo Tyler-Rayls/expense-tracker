@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Login from './Login/Main';
 import Expenses from './Expenses/Main';
-import Family from './Families/Family';
+import Family from './Families/Main';
 import AccountSettings from './ManageAccount/AccountSettingsPage';
 
 const Navbar = () => {
