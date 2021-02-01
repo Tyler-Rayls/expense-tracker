@@ -2,12 +2,11 @@ import React from 'react';
 
 const FamilySearch = () => {
     return (
-        <div className="row mt-5">
+        <div className="row mt-4">
             <div className="row">
                 <h2 className="text-center">Search Existing Families</h2>
-                <hr />
             </div>
-            <div className="row justify-content-center">
+            <div className="row justify-content-center mt-3">
                 <div className="col-12 text-center">
                     <label for="family" className="input-label d-block">Surname</label>
                     <input type="text" name="family" className=""></input>

@@ -20,8 +20,7 @@ function CascadingDropdown() {
         };
        
         return (
-          <div>
-            <div className="row justify-content-evenly align-items-end">
+          <>
               <div className="col-4">
                 <Select
                   placeholder="Filter by..."
@@ -40,11 +39,10 @@ function CascadingDropdown() {
                   getOptionLabel={x => x.name}
                 />
               </div>
-              <div className="col-2 align-items-center">
+              <div className="col-4">
                 <button type="button" className="btn btn-primary">Filter</button>
               </div>
-            </div>
-          </div>
+          </>
         );
       }
 

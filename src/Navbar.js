@@ -4,6 +4,7 @@ import Login from './Login/Main';
 import Expenses from './Expenses/Main';
 import Family from './Families/Main';
 import Register from './Register/Main';
+import Rewards from './Rewards/Main';
 import Index from './IndexOfFeatures';
 import AccountSettings from './ManageAccount/AccountSettingsPage';
 
@@ -23,6 +24,9 @@ const Navbar = () => {
                         </li>
                         <li className="nav-item">
                             <Link to="/expenses" className="nav-link" aria-current="page">Expenses</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/rewards" className="nav-link" aria-current="page">Rewards</Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/family" className="nav-link" aria-current="page">Families</Link>
@@ -50,6 +54,9 @@ const Navbar = () => {
                 </Route>
                 <Route path="/features">
                     <Index />
+                </Route>
+                <Route path="/rewards">
+                    <Rewards />
                 </Route>
                 <Route path="/">
                     <Login />
