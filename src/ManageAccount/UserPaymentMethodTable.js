@@ -1,7 +1,8 @@
 import React from 'react'
 
-const PaymentMethodTable = () => {
+const UserPaymentMethodTable = () => {
     return (
+        <div>
             <table class="table table-sm mt-4 text-center">
                 <thead>
                 <tr>
@@ -27,18 +28,30 @@ const PaymentMethodTable = () => {
                         <td><button type="button" className="btn btn-sm btn-danger">Remove</button></td>
                     </tr>
                     <tr>
-                        <td>Amazon Prime Rewards Visa</td>
-                        <td>2%</td>
+                        <td>Chase Unlimited</td>
+                        <td>1.5%</td>
+                        <td>3%</td>
                         <td>5%</td>
-                        <td>1%</td>
-                        <td>0%</td>
-                        <td>5%</td>
+                        <td>3%</td>
+                        <td>1.5%</td>
                         <td>$0</td>
+                        <td><button type="button" className="btn btn-sm btn-danger">Remove</button></td>
+                    </tr>
+                    <tr>
+                        <td>Delta SkyMiles Amex</td>
+                        <td>0%</td>
+                        <td>2%</td>
+                        <td>3%</td>
+                        <td>0%</td>
+                        <td>0%</td>
+                        <td>$99</td>
                         <td><button type="button" className="btn btn-sm btn-danger">Remove</button></td>
                     </tr>
                 </tbody>
             </table>
+        To add a new payment method, please navigate to the Add Credit Cards page.
+        </div>
     )
 }
 
-export default PaymentMethodTable;
+export default UserPaymentMethodTable;

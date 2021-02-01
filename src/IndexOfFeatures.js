@@ -16,8 +16,8 @@ const Features = () => {
                 <li className="list-group-item"><Link to="/family">Create a family</Link></li>
                 <li className="list-group-item"><Link to="/family">Search for a family</Link></li>
                 <li className="list-group-item"><Link to="/accountSettings">View your payment methods</Link></li>
-                <li className="list-group-item"><Link to="/accountSettings">Edit and delete your payment methods</Link></li>
-                <li className="list-group-item"><Link to="/accountSettings">Add a payment method</Link></li>
+                <li className="list-group-item"><Link to="/accountSettings">Delete your payment methods</Link></li>
+                <li className="list-group-item"><Link to="/creditCards">Add a payment method</Link></li>
                 <li className="list-group-item"><Link to="/accountSettings">Change your name</Link></li>
                 <li className="list-group-item"><Link to="/accountSettings">Delete your account</Link></li>
                 <li className="list-group-item"><Link to="/accountSettings">Change your password</Link></li>
