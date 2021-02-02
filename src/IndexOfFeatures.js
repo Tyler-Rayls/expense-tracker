@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
 const Features = () => {
     return (
-        <div className="container mt-5">
+        <div className="container mt-5 mb-5">
             <h2>List of features</h2>
             <ul className="list-group">
                 <li className="list-group-item"><Link to="/register">Register an account</Link></li>
@@ -18,9 +18,11 @@ const Features = () => {
                 <li className="list-group-item"><Link to="/accountSettings">View your payment methods</Link></li>
                 <li className="list-group-item"><Link to="/accountSettings">Delete your payment methods</Link></li>
                 <li className="list-group-item"><Link to="/creditCards">Add a payment method</Link></li>
+                <li className="list-group-item"><Link to="/creditCards">Add a new credit card to the database</Link></li>
                 <li className="list-group-item"><Link to="/accountSettings">Change your name</Link></li>
                 <li className="list-group-item"><Link to="/accountSettings">Delete your account</Link></li>
                 <li className="list-group-item"><Link to="/accountSettings">Change your password</Link></li>
+                <li className="list-group-item"><Link to="/accountSettings">View your cash back rewards</Link></li>
             </ul>
         </div>
     )
