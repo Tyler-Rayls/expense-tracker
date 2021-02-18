@@ -5,7 +5,7 @@ import ExpensesTable from './ExpensesTable';
 
 const ExpensesMain = () => {
     return (
-        <div className="container w-75">
+        <div className="container">
             <div className="row mt-4">
                 <h2 className="text-center">Expenses</h2>
                 <hr className="mb-0"/>
