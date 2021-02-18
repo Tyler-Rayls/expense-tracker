@@ -28,7 +28,7 @@ const AddExpenseForm = () => {
                 </select>
             </div>
             <div className="col-1 text-center">
-                <button type="button" className="btn btn-primary">Add</button>
+                <button type="button" className="btn btn-outline-primary"><i class="bi bi-plus-circle"></i></button>
             </div>
         </>
     )

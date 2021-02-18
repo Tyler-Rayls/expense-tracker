@@ -8,7 +8,7 @@ const Family = (props) => {
                     <h5 className="card-title d-inline">{props.family.surname}</h5><p className="text-muted fw-light d-inline"> #{props.family.id}</p>
                 </div>
                 <ul className="list-group list-group-flush">
-                    <li className="list-group-item">{props.family.members[0]}</li>
+                    <li className="list-group-item"><span className="text-muted fw-light">Head: </span>{props.family.members[0]}</li>
                     <li className="list-group-item">{props.family.members[1]}</li>
                     <li className="list-group-item">{props.family.members[2]}</li>
                     <li className="list-group-item">Total Spent: ${props.family.total}</li>
