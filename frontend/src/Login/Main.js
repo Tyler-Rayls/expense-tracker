@@ -13,10 +13,10 @@ class LoginMain extends Component {
     }
 
     connectBackend = () => {
-        axios.get("/express").then(response => {
+        axios.get("http://flip1.engr.oregonstate.edu:4221/express").then(response => {
             console.log(response);
             this.setState({
-                connected: response
+                connected: response.data
             });
         });
     };
