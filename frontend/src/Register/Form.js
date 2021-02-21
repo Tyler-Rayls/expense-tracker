@@ -30,7 +30,7 @@ class RegisterForm extends Component {
         // Checks to see if the password and password confirmation are equal
         if (this.state.password == this.state.passwordConfirmation) {
             axios.post("http://flip1.engr.oregonstate.edu:4221/register", this.state).then(res => {
-                alert(`An account was created for ${res.data.firstName} ${res.data.lastName} with the email ${res.data.email}`);
+                alert(res.data.message);
             });
         } else {
             alert("The passwords you entered do not match.");
