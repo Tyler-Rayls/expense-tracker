@@ -25,10 +25,11 @@ app.post("/register", (req, res) => {
     var inserts = [req.body.email, req.body.firstName, req.body.lastName, req.body.password];
     sql = mysql.pool.query(query, inserts, function(error, results, fields) {
         if (error) {
-            res.send("Sorry, an account could not be created with this information");
+            var message = "Sorry, an account could not be created with this information"
         } else {
-            res.send(`An account was created for ${req.body.firstName} using ${req.body.email}`);
+            var message = `An account was created for ${req.body.firstName} using ${req.body.email}`;
         }
+        res.send({message});
     })
 })
 
