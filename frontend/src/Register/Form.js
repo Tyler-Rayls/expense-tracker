@@ -13,7 +13,7 @@ class RegisterForm extends Component {
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.createAccount = this.createAccount.bind(this);
-    }
+    };
 
     // Updates the state value associated with the input when it is changed
     handleInputChange(event) {
@@ -32,7 +32,7 @@ class RegisterForm extends Component {
             password: "",
             passwordConfirmation: ""
         });
-    }
+    };
 
     createAccount(event) {  
         event.preventDefault();
