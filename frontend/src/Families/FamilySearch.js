@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const FamilySearch = () => {
+    const user = useSelector((state) => state.user);
+    
     return (
         <div className="row mt-4">
             <div className="row">

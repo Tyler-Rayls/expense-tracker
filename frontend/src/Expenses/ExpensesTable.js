@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const ExpenseTable = () => {
+    const user = useSelector((state) => state.user);
+
     return(
         <table className="table">
             <thead>

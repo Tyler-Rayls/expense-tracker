@@ -1,6 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { login, logout } from '../Redux/Ducks/user';
+import { useSelector } from 'react-redux';
 
 const UserInfoTable = () => {
     const user = useSelector((state) => state.user);

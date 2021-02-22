@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 const Family = (props) => {
+    const user = useSelector((state) => state.user);
+    
     return (
         <div className="col-8 col-md-6 col-lg-4">
             <div className="card mb-3 text-center">
