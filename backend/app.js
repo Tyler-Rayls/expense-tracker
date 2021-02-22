@@ -4,7 +4,7 @@ var mysql = require('./dbcon.js');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 4221;
+const port = 4222;
 const corsOptions = {
     origin: "http://flip1.engr.oregonstate.edu:4220",
     optionsSuccessStatus: 200
@@ -47,5 +47,11 @@ app.get("/login", (req, res) => {
         res.send(queryResults);
     });
 });
+
+// app.get("/creditCards", (req,res) =>{
+//     var mysql = req.app.get('mysql');
+//     var sql = "SELECT "
+// }
+// );
 
 app.listen(port, () => console.log(`Express is listening on the port ${port}`));
