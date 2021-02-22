@@ -1,11 +1,15 @@
-const LOGIN = "userLogin";
-const LOGOUT = "userLogout";
+const LOGIN = "login";
+const LOGOUT = "logout";
 
-export const userLogin = () => ({
-    type: LOGIN
+export const login = (data) => ({
+    type: LOGIN,
+    userID: data.userID,
+    firstName: data.firstName,
+    lastName: data.lastName,
+    email: data.email
 });
 
-export const userLogout = () => ({
+export const logout = () => ({
     type: LOGOUT
 });
 
@@ -17,10 +21,10 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-    switch (action.type, action.ID, action.first, action.last, action.userEmail) {
-        case "LOGIN":
-            return {userID: action.ID, firstName: action.first, lastName: action.last, email: action.userEmail };
-        case "LOGOUT":
+    switch (action.type) {
+        case LOGIN:
+            return {...state, userID: action.userID, firstName: action.firstName, lastName: action.lastName, email: action.email};
+        case LOGOUT:
             return initialState;
         default:
             return state;

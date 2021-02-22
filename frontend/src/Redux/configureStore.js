@@ -1,8 +1,8 @@
 import { combineReducers, createStore } from 'redux';
-import activeUser from './Ducks/user';
+import userReducer from './Ducks/user';
 
 const reducer = combineReducers({
-    user: activeUser
+    user: userReducer
 });
 
 const store = createStore(reducer);
