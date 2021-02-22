@@ -10,7 +10,7 @@ const corsOptions = {
     optionsSuccessStatus: 200
 }
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.set('mysql', mysql);
@@ -48,10 +48,19 @@ app.get("/login", (req, res) => {
     });
 });
 
-// app.get("/creditCards", (req,res) =>{
-//     var mysql = req.app.get('mysql');
-//     var sql = "SELECT "
-// }
-// );
+app.get("/creditCards", (req,res) =>{
+    var mysql = req.app.get('mysql');
+    var sql = "SELECT cardName, gas, grocery, travel, dining, otherReward, annualFee FROM CreditCards";
+    sql = mysql.pool.query(sql, function(error, results, fields) {
+        var queryResults = [];
+        results.forEach ((row) =>{
+            queryResults.push(row)
+        })
+        console.log('request received')
+        res.send(queryResults);
+}
+)});
+
+
 
 app.listen(port, () => console.log(`Express is listening on the port ${port}`));

@@ -1,6 +1,29 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
 
-const AllPaymentsMethodTable = () => {
+
+class AllPaymentMethodsTable extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: []
+        }}
+      
+    
+      componentDidMount() {
+        axios.get("http://flip1.engr.oregonstate.edu:4222/creditCards").then(res => {
+                this.setState({data: res.data});
+            })
+            .catch(function (error) {
+                console.log(error);
+             });
+            }
+
+
+
+    render(){
+        const {data} = this.state;
+        console.log(data)
     return (
             <table class="table table-sm mt-4 text-center">
                 <thead>
@@ -16,49 +39,22 @@ const AllPaymentsMethodTable = () => {
                 </tr>
                 </thead>
                 <tbody>
+                {data.map(item => 
                     <tr>
-                        <td>Chase Sapphire</td>
-                        <td>3%</td>
-                        <td>2%</td>
-                        <td>1%</td>
-                        <td>0%</td>
-                        <td>0%</td>
-                        <td>$550</td>
+                        <td>{item.cardName}</td>
+                        <td>{item.gas}%</td>
+                        <td>{item.grocery}%</td>
+                        <td>{item.travel}%</td>
+                        <td>{item.dining}%</td>
+                        <td>{item.otherReward}%</td>
+                        <td>${item.annualFee}</td>
                         <td><button type="button" className="btn btn-sm btn-success">Add Payment Method</button></td>
                     </tr>
-                    <tr>
-                        <td>Chase Unlimited</td>
-                        <td>1.5%</td>
-                        <td>3%</td>
-                        <td>5%</td>
-                        <td>3%</td>
-                        <td>1.5%</td>
-                        <td>$0</td>
-                        <td><button type="button" className="btn btn-sm btn-success">Add Payment Method</button></td>
-                    </tr>
-                    <tr>
-                        <td>Amazon Prime Rewards Visa</td>
-                        <td>2%</td>
-                        <td>5%</td>
-                        <td>1%</td>
-                        <td>0%</td>
-                        <td>5%</td>
-                        <td>$0</td>
-                        <td><button type="button" className="btn btn-sm btn-success">Add Payment Method</button></td>
-                    </tr>
-                    <tr>
-                        <td>Delta SkyMiles Amex</td>
-                        <td>0%</td>
-                        <td>2%</td>
-                        <td>3%</td>
-                        <td>0%</td>
-                        <td>0%</td>
-                        <td>$99</td>
-                        <td><button type="button" className="btn btn-sm btn-success">Add Payment Method</button></td>
-                    </tr>
+                )}
                 </tbody>
             </table>
     )
+};
 }
 
-export default AllPaymentsMethodTable;
+export default AllPaymentMethodsTable;
