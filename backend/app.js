@@ -15,22 +15,37 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.set('mysql', mysql);
 
-app.get("/express", (req, res) => {
-    res.send("Express is connected")
-});
-
 app.post("/register", (req, res) => {
     var mysql = req.app.get('mysql');
-    var query = "INSERT INTO Users (email, firstName, lastName, password) VALUES (?, ?, ?, ?)";
+    var sql = "INSERT INTO Users (email, firstName, lastName, password) VALUES (?, ?, ?, ?)";
     var inserts = [req.body.email, req.body.firstName, req.body.lastName, req.body.password];
-    sql = mysql.pool.query(query, inserts, function(error, results, fields) {
+    sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
         if (error) {
             var message = "Sorry, an account could not be created with this information"
         } else {
             var message = `An account was created for ${req.body.firstName} using ${req.body.email}`;
         }
         res.send({message});
-    })
-})
+    });
+});
+
+app.get("/login", (req, res) => {
+    var mysql = req.app.get('mysql');
+    var sql = "SELECT userID, email, firstName, lastName FROM Users WHERE email = ? AND password = ?";
+    var inserts = [req.query.email, req.query.password];
+    sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
+        const queryResults = {};
+        if (error || results[0] == undefined) {
+            queryResults["successful"] = false;
+        } else {
+            queryResults["successful"] = true;
+            queryResults["userID"] = results[0].userID;
+            queryResults["email"] = results[0].email;
+            queryResults["firstName"] = results[0].firstName;
+            queryResults["lastName"] = results[0].lastName;
+        };
+        res.send(queryResults);
+    });
+});
 
 app.listen(port, () => console.log(`Express is listening on the port ${port}`));
