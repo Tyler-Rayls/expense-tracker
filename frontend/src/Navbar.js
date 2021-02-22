@@ -1,16 +1,9 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-import Login from './Login/Main';
-import Expenses from './Expenses/Main';
-import Family from './Families/Main';
-import Register from './Register/Main';
-import Index from './IndexOfFeatures';
-import AccountSettings from './ManageAccount/UserProfile';
-import CreditCardMain from './CreditCards/Main';
+import {Link} from 'react-router-dom';
+
 
 const Navbar = () => {
     return (
-        <Router>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
                     <Link to="/" className="navbar-brand">Expense Tracker</Link>
@@ -38,31 +31,6 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
-
-            <Switch>
-                <Route path="/expenses">
-                    <Expenses />
-                </Route>
-                <Route path="/family">
-                    <Family />
-                </Route>
-                <Route path="/accountSettings">
-                   <AccountSettings/>
-                </Route>
-                <Route path="/register">
-                    <Register />
-                </Route>
-                <Route path="/features">
-                    <Index />
-                </Route>
-                <Route path="/creditCards">
-                    <CreditCardMain />
-                </Route>
-                <Route path="/">
-                    <Login />
-                </Route>
-            </Switch>
-        </Router>
     );
 }
 export default Navbar;
