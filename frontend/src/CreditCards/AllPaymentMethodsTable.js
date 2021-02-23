@@ -11,7 +11,7 @@ class AllPaymentMethodsTable extends React.Component {
       
     
       componentDidMount() {
-        axios.get("http://flip1.engr.oregonstate.edu:4222/creditCards").then(res => {
+        axios.get("http://flip1.engr.oregonstate.edu:4221/creditCards").then(res => {
                 this.setState({data: res.data});
             })
             .catch(function (error) {

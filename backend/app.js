@@ -56,10 +56,25 @@ app.get("/creditCards", (req,res) =>{
         results.forEach ((row) =>{
             queryResults.push(row)
         })
-        console.log('request received')
         res.send(queryResults);
 }
 )});
+
+app.post("/creditCards", (req, res) => {
+    console.log(req)
+    var mysql = req.app.get('mysql');
+    var sql = "INSERT INTO CreditCards (cardName, gas, grocery, travel, dining, otherReward, annualFee) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    var inserts = [req.body.cardName, req.body.gas, req.body.grocery, req.body.travel, req.body.dining, req.body.otherReward, req.body.annualFee];
+    sql = mysql.pool.query(sql, inserts, function(error, results) {
+        if (error) {
+            console.log(error)
+            var message = "Error adding card. Please make sure your card is not already in the table."
+        } else {
+            var message = `${req.body.cardName} was successfully added to the card database.`;
+        }
+        res.send({message});
+    });
+});
 
 
 
