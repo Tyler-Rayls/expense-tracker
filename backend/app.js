@@ -4,7 +4,7 @@ var mysql = require('./dbcon.js');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 4222;
+const port = 4221;
 const corsOptions = {
     origin: "http://flip1.engr.oregonstate.edu:4220",
     optionsSuccessStatus: 200
@@ -61,13 +61,11 @@ app.get("/creditCards", (req,res) =>{
 )});
 
 app.post("/creditCards", (req, res) => {
-    console.log(req)
     var mysql = req.app.get('mysql');
     var sql = "INSERT INTO CreditCards (cardName, gas, grocery, travel, dining, otherReward, annualFee) VALUES (?, ?, ?, ?, ?, ?, ?)";
     var inserts = [req.body.cardName, req.body.gas, req.body.grocery, req.body.travel, req.body.dining, req.body.otherReward, req.body.annualFee];
     sql = mysql.pool.query(sql, inserts, function(error, results) {
         if (error) {
-            console.log(error)
             var message = "Error adding card. Please make sure your card is not already in the table."
         } else {
             var message = `${req.body.cardName} was successfully added to the card database.`;
@@ -76,6 +74,27 @@ app.post("/creditCards", (req, res) => {
     });
 });
 
-
+app.post("/family", (req, res) => {
+    var mysql = req.app.get('mysql');
+    var createFamily = "INSERT INTO Families (surname) VALUES (?)";
+    var inserts = [req.body.surname];
+    createFamily = mysql.pool.query(createFamily, inserts, function(error, results) {
+        if (error) {
+            var message = "There was an error creating this family.";
+            res.send({message});
+        } else {
+            var addFamilyMember = "INSERT INTO FamilyMembers (userID, familyID, isHead) VALUES (?, ?, ?)";
+            var inserts = [req.body.user.userID, results.insertId, 1];
+            addFamilyMember = mysql.pool.query(addFamilyMember, inserts, function(error, results) {
+                if (error) {
+                    var message = "There was an error creating this family and adding you as the head.";
+                } else {
+                    var message = `Success! The ${req.body.surname} family was created with ${req.body.user.firstName} ${req.body.user.lastName} as the head of house.`;
+                }
+                res.send({message});
+            });
+        }
+    })
+});
 
 app.listen(port, () => console.log(`Express is listening on the port ${port}`));
