@@ -4,13 +4,13 @@ var mysql = require('./dbcon.js');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 4221;
+const port = 4222;
 const corsOptions = {
     origin: "http://flip1.engr.oregonstate.edu:4220",
     optionsSuccessStatus: 200
 }
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.set('mysql', mysql);
@@ -47,5 +47,35 @@ app.get("/login", (req, res) => {
         res.send(queryResults);
     });
 });
+
+app.get("/creditCards", (req,res) =>{
+    var mysql = req.app.get('mysql');
+    var sql = "SELECT cardName, gas, grocery, travel, dining, otherReward, annualFee FROM CreditCards";
+    sql = mysql.pool.query(sql, function(error, results, fields) {
+        var queryResults = [];
+        results.forEach ((row) =>{
+            queryResults.push(row)
+        })
+        res.send(queryResults);
+}
+)});
+
+app.post("/creditCards", (req, res) => {
+    console.log(req)
+    var mysql = req.app.get('mysql');
+    var sql = "INSERT INTO CreditCards (cardName, gas, grocery, travel, dining, otherReward, annualFee) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    var inserts = [req.body.cardName, req.body.gas, req.body.grocery, req.body.travel, req.body.dining, req.body.otherReward, req.body.annualFee];
+    sql = mysql.pool.query(sql, inserts, function(error, results) {
+        if (error) {
+            console.log(error)
+            var message = "Error adding card. Please make sure your card is not already in the table."
+        } else {
+            var message = `${req.body.cardName} was successfully added to the card database.`;
+        }
+        res.send({message});
+    });
+});
+
+
 
 app.listen(port, () => console.log(`Express is listening on the port ${port}`));
