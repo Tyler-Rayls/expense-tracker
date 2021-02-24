@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
 
 class AddExpenseForm extends React.Component {
     constructor(props) {
@@ -44,16 +43,15 @@ class AddExpenseForm extends React.Component {
         });
     };
 
-    addCard(event) {  
+    addCard(event) {
         event.preventDefault();
-        console.log(this.state)
         axios.post("http://flip1.engr.oregonstate.edu:4221/creditCards", this.state).then(res => {
             alert(res.data.message);
             this.clearInput();
-        }).then(res => {window.location.reload();});
-        };
+        }).then(res => { window.location.reload(); });
+    };
 
-    
+
     render() {
         return (
             <>

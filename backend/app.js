@@ -50,7 +50,7 @@ app.get("/login", (req, res) => {
 
 app.get("/creditcards", (req,res) =>{
     var mysql = req.app.get('mysql');
-    var sql = "SELECT cardName, gas, grocery, travel, dining, otherReward, annualFee FROM CreditCards";
+    var sql = "SELECT cardID, cardName, gas, grocery, travel, dining, otherReward, annualFee FROM CreditCards";
     sql = mysql.pool.query(sql, function(error, results, fields) {
         var queryResults = [];
         results.forEach ((row) =>{
@@ -59,6 +59,7 @@ app.get("/creditcards", (req,res) =>{
         res.send(queryResults);
     });
 });
+
 
 app.post("/creditcards", (req, res) => {
     var mysql = req.app.get('mysql');
@@ -74,6 +75,46 @@ app.post("/creditcards", (req, res) => {
     });
 });
 
+app.post("/creditCardsForPaymentMethodsTable", (req,res) =>{
+    var mysql = req.app.get('mysql');
+    var sql = "SELECT cardName, gas, grocery, travel, dining, otherReward, annualFee FROM CreditCards WHERE cardID IN (?)";
+    insert = [req.body.cardID]
+    sql = mysql.pool.query(sql, insert, function(error, results, fields) {
+        var queryResults = [];
+        results.forEach ((row) =>{
+            queryResults.push(row)
+        })
+        res.send(queryResults);
+    });
+});
+
+app.post("/paymentMethods", (req, res) => {
+    var mysql = req.app.get('mysql');
+    var sql = "SELECT paymentID, userID, cardID FROM PaymentMethods WHERE userID = ?";
+    insert = [req.body.userID]
+    sql = mysql.pool.query(sql, insert, function(error, results, fields) {
+        var queryResults = [];
+        results.forEach ((row) =>{
+            queryResults.push(row)
+        })
+        console.log(queryResults)
+        res.send(queryResults);
+    });
+});
+
+app.post("/addPaymentMethod", (req, res) => {
+    var mysql = req.app.get('mysql');
+    var sql = "INSERT INTO PaymentMethods (cardID, userID) VALUES (?, ?)";
+    var inserts = [req.body.cardID, req.body.userID];
+    sql = mysql.pool.query(sql, inserts, function(error, results) {
+        if (error) {
+            var message = "Error adding card. Please make sure you have not already added this card."
+        } else {
+            var message = `Successfully added card to payment methods.`;
+        }
+        res.send({message});
+});
+  
 app.post("/family", (req, res) => {
     var mysql = req.app.get('mysql');
     var createFamily = "INSERT INTO Families (surname) VALUES (?)";
