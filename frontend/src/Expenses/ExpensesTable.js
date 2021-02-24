@@ -1,9 +1,35 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import axios from 'axios';
 
-const ExpenseTable = () => {
-    const user = useSelector((state) => state.user);
+class ExpenseTable extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: []
+        };
+    };
 
+    componentDidMount() {
+        if (this.props.currentUser != null) {
+        //Request cards with matching userID from PaymentMethods
+        axios({
+            method: 'post',
+            url: "http://flip1.engr.oregonstate.edu:4225/expensesTable",
+            headers: {},
+            data: {
+                userID: this.props.currentUser, //Get unique userID
+            }
+        }).then(response => {
+            console.log(response.data)
+            this.setState({data: response.data})
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }};
+
+    render(){
+    const { data } = this.state;
     return(
         <table className="table">
             <thead>
@@ -17,21 +43,20 @@ const ExpenseTable = () => {
                 </tr>
             </thead>
             <tbody>
-
+            {data.map(item => 
+                <tr>
+                    <td>${item.amount}</td>
+                    <td>{item.date.slice(0,10)}</td>
+                    <td>{item.cardName}</td>
+                    <td>{item.category}</td>
+                    <td><button type="button" className="btn btn-primary">Edit</button></td>
+                    <td><button type="button" className="btn btn-danger">Delete</button></td>
+                </tr>)}
             </tbody>
         </table>
     )
 }
+}
 
 export default ExpenseTable;
 
-// {data.map(item => 
-//     <tr>
-//         <td>{item.amount}</td>
-//         <td>{item.cardName}</td>
-//         <td>{item.date}</td>
-//         <td>{item.paymentMethod}</td>
-//         <td>{item.category}</td>
-//         <td><button type="button" className="btn btn-primary">Edit</button></td>
-//         <td><button type="button" className="btn btn-danger">Delete</button></td>
-//     </tr>)}

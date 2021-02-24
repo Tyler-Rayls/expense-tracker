@@ -16,30 +16,14 @@ class UserPaymentMethodTable extends React.Component {
         //Request cards with matching userID from PaymentMethods
         axios({
             method: 'post',
-            url: "http://flip1.engr.oregonstate.edu:4225/paymentMethods",
+            url: "http://flip1.engr.oregonstate.edu:4225/creditCardsForExpenseAndPaymentMethods",
             headers: {},
             data: {
                 userID: this.props.currentUser, //Get unique userID
             }
         }).then(response => {
-            var cardIDList = []
-            response.data.map(item => 
-                {cardIDList.push(item.cardID)});
-        //Request cards with matching cardIDs from CreditCards
-        axios({
-            method: 'post',
-            url: "http://flip1.engr.oregonstate.edu:4225/creditCardsForPaymentMethodsTable",
-            headers: {},
-            data: {
-                cardID: cardIDList, //Get unique cardID
-            }
-        }
-        ).then(res => {
-            this.setState({data: res.data});
-        })
-            .catch(function (error) {
-                console.log(error);
-            });
+            console.log(response.data)
+            this.setState({data: response.data})
         })
         .catch(function (error) {
             console.log(error);

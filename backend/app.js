@@ -75,23 +75,12 @@ app.post("/creditcards", (req, res) => {
     });
 });
 
-app.post("/creditCardsForPaymentMethodsTable", (req, res) => {
+app.post("/creditCardsForExpenseAndPaymentMethods", (req, res) => {
     var mysql = req.app.get('mysql');
-    var sql = "SELECT cardName, gas, grocery, travel, dining, otherReward, annualFee FROM CreditCards WHERE cardID IN (?)";
-    insert = [req.body.cardID]
-    sql = mysql.pool.query(sql, insert, function (error, results, fields) {
-        var queryResults = [];
-        results.forEach((row) => {
-            queryResults.push(row)
-        })
-        res.send(queryResults);
-    });
-});
-
-app.post("/creditCardsForDropdown", (req, res) => {
-    var mysql = req.app.get('mysql');
-    var sql = "SELECT cardID, cardName FROM CreditCards WHERE cardID IN (?)";
-    insert = [req.body.cardID]
+    var sql = "SELECT CreditCards.cardID, CreditCards.cardName, CreditCards.gas, CreditCards.grocery, CreditCards.travel, CreditCards.dining, CreditCards.otherReward, CreditCards.annualFee FROM CreditCards \
+    INNER JOIN PaymentMethods ON PaymentMethods.cardID = CreditCards.cardID \
+    WHERE PaymentMethods.userID = ?;";
+    insert = [req.body.userID]
     sql = mysql.pool.query(sql, insert, function (error, results, fields) {
         var queryResults = [];
         results.forEach((row) => {
@@ -170,19 +159,36 @@ app.post("/addPaymentMethod", (req, res) => {
         });
     });
 
-    app.post("/expenses", (req, res) => {
+    app.post("/expensesTable", (req, res) => {
+        var mysql = req.app.get('mysql');
+        var sql = "SELECT Expenses.userID, Expenses.amount, Expenses.date, Expenses.category, CreditCards.cardName FROM Expenses \
+        INNER JOIN PaymentMethods ON PaymentMethods.paymentID = Expenses.paymentID \
+        INNER JOIN CreditCards ON CreditCards.cardID = PaymentMethods.cardID \
+        WHERE Expenses.userID = ?;";
+        insert = [req.body.userID]
+        sql = mysql.pool.query(sql, insert, function (error, results, fields) {
+            var queryResults = [];
+            results.forEach((row) => {
+                queryResults.push(row)
+            })
+            console.log(queryResults);
+            res.send(queryResults);
+        });
+    });
+
+
+    app.post("/addExpense", (req, res) => {
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Expenses (userID, amount, date, category, paymentID) VALUES (?, ?, ?, ?, ?)";
-        var inserts = [req.body.userID, req.amount, req.body.date, req.body.category, req.body.paymentID];
+        var inserts = [req.body.userID, req.body.amount, req.body.date, req.body.category, req.body.paymentID];
         sql = mysql.pool.query(sql, inserts, function (error, results) {
             if (error) {
-                var message = "Error adding expense."
+                var message = "Error adding expense"
             } else {
-                var message = "Expense added.";
+                var message = "Expense was successfully added.";
             }
             res.send({ message });
         });
     });
-
 
     app.listen(port, () => console.log(`Express is listening on the port ${port}`));
