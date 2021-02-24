@@ -16,7 +16,7 @@ class UserPaymentMethodTable extends React.Component {
         //Request cards with matching userID from PaymentMethods
         axios({
             method: 'post',
-            url: "http://flip1.engr.oregonstate.edu:4225/creditCardsForExpenseAndPaymentMethods",
+            url: "http://flip1.engr.oregonstate.edu:4221/creditCardsForExpenseAndPaymentMethods",
             headers: {},
             data: {
                 userID: this.props.currentUser, //Get unique userID

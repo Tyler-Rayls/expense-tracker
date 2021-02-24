@@ -45,7 +45,7 @@ class AddExpenseForm extends React.Component {
 
     addCard(event) {
         event.preventDefault();
-        axios.post("http://flip1.engr.oregonstate.edu:4225/creditCards", this.state).then(res => {
+        axios.post("http://flip1.engr.oregonstate.edu:4221/creditCards", this.state).then(res => {
             alert(res.data.message);
             this.clearInput();
         }).then(res => { window.location.reload(); });

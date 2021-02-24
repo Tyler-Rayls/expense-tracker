@@ -24,7 +24,7 @@ class AddExpenseForm extends React.Component {
         //Request cards with matching userID from PaymentMethods
         axios({
             method: 'post',
-            url: "http://flip1.engr.oregonstate.edu:4225/creditCardsForExpenseAndPaymentMethods",
+            url: "http://flip1.engr.oregonstate.edu:4221/creditCardsForExpenseAndPaymentMethods",
             headers: {},
             data: {
                 userID: this.props.currentUser, //Get unique userID
@@ -60,7 +60,7 @@ class AddExpenseForm extends React.Component {
 
     addExpense(event) {
         event.preventDefault();
-        axios.post("http://flip1.engr.oregonstate.edu:4225/addExpense", this.state.values).then(res => {
+        axios.post("http://flip1.engr.oregonstate.edu:4221/addExpense", this.state.values).then(res => {
             alert(res.data.message);
             this.clearInput();
         })

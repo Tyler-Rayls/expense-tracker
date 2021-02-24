@@ -4,7 +4,7 @@ var mysql = require('./dbcon.js');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 4225;
+const port = 4221;
 const corsOptions = {
     origin: "http://flip1.engr.oregonstate.edu:4220",
     optionsSuccessStatus: 200

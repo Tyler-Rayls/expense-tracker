@@ -17,7 +17,7 @@ const LoginForm = () => {
 
     const validateLogin = (event) => {
         event.preventDefault();
-        axios.get("http://flip1.engr.oregonstate.edu:4225/login", { params: {email: email, password: password} }).then(res => {
+        axios.get("http://flip1.engr.oregonstate.edu:4221/login", { params: {email: email, password: password} }).then(res => {
             if (res.data.successful == true) {
                 handleLogin(res.data);
             } else {

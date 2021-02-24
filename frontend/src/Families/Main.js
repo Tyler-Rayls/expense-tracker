@@ -13,7 +13,7 @@ const FamilyMain = () => {
 
     useEffect(() => {
         families = {};
-        axios.get("http://flip1.engr.oregonstate.edu:4225/family", { params: {userID: user.userID} }).then(res => {
+        axios.get("http://flip1.engr.oregonstate.edu:4221/family", { params: {userID: user.userID} }).then(res => {
             for (const row of res.data) {
                 if (families[row.familyID] == null) {
                     families[row.familyID] = {};
@@ -30,6 +30,7 @@ const FamilyMain = () => {
             }
         });
     }, [families]);  
+
 
     return (
         <div className="container mt-4">
