@@ -1,9 +1,35 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import axios from 'axios';
 
-const ExpenseTable = () => {
-    const user = useSelector((state) => state.user);
+class ExpenseTable extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: []
+        };
+    };
 
+    componentDidMount() {
+        if (this.props.currentUser != null) {
+        //Request cards with matching userID from PaymentMethods
+        axios({
+            method: 'post',
+            url: "http://flip1.engr.oregonstate.edu:4221/expensesTable",
+            headers: {},
+            data: {
+                userID: this.props.currentUser, //Get unique userID
+            }
+        }).then(response => {
+            console.log(response.data)
+            this.setState({data: response.data})
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }};
+
+    render(){
+    const { data } = this.state;
     return(
         <table className="table">
             <thead>
@@ -17,33 +43,20 @@ const ExpenseTable = () => {
                 </tr>
             </thead>
             <tbody>
+            {data.map(item => 
                 <tr>
-                    <td>$20.31</td>
-                    <td>1/21/2021</td>
-                    <td>Chase Sapphire</td>
-                    <td>Gas</td>
+                    <td>${item.amount}</td>
+                    <td>{item.date.slice(0,10)}</td>
+                    <td>{item.cardName}</td>
+                    <td>{item.category}</td>
                     <td><button type="button" className="btn btn-primary">Edit</button></td>
                     <td><button type="button" className="btn btn-danger">Delete</button></td>
-                </tr>
-                <tr>
-                    <td>$4.58</td>
-                    <td>12/30/2020</td>
-                    <td>Chase Unlimited</td>
-                    <td>Other</td>
-                    <td><button type="button" className="btn btn-primary">Edit</button></td>
-                    <td><button type="button" className="btn btn-danger">Delete</button></td>
-                </tr>
-                <tr>
-                    <td>$300.00</td>
-                    <td>12/20/2020</td>
-                    <td>Delta SkyMiles Amex</td>
-                    <td>Travel</td>
-                    <td><button type="button" className="btn btn-primary">Edit</button></td>
-                    <td><button type="button" className="btn btn-danger">Delete</button></td>
-                </tr>
+                </tr>)}
             </tbody>
         </table>
     )
 }
+}
 
 export default ExpenseTable;
+

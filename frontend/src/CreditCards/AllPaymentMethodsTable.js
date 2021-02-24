@@ -27,7 +27,6 @@ class AllPaymentMethodsTable extends React.Component {
             })
         }
     };
-    
 
     render(){
         const {data} = this.state;
@@ -46,20 +45,20 @@ class AllPaymentMethodsTable extends React.Component {
                 </tr>
                 </thead>
                 <tbody>
-                    {data.map(item => 
-                        <tr>
-                            <td>{item.cardName}</td>
-                            <td>{item.gas}%</td>
-                            <td>{item.grocery}%</td>
-                            <td>{item.travel}%</td>
-                            <td>{item.dining}%</td>
-                            <td>{item.otherReward}%</td>
-                            <td>${item.annualFee}</td>
-                            <td><button type="button" className="btn btn-sm btn-success" onClick={()=> this.addCard(item.cardID)}>Add Payment Method</button></td>
-                        </tr>
-                    )}
+                {data.map(item => 
+                    <tr>
+                        <td>{item.cardName}</td>
+                        <td>{item.gas}%</td>
+                        <td>{item.grocery}%</td>
+                        <td>{item.travel}%</td>
+                        <td>{item.dining}%</td>
+                        <td>{item.otherReward}%</td>
+                        <td>${item.annualFee}</td>
+                        <td><button type="button" className="btn btn-sm btn-success" onClick={()=> this.addCard(item.cardID)}>Add Payment Method</button></td>
+                    </tr>)}
                 </tbody>
-            </table>
+                </table>
+
         )
     };
 }
