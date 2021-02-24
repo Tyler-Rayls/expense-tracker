@@ -38,7 +38,7 @@ class RegisterForm extends Component {
         event.preventDefault();
         // Checks to see if the password and password confirmation are equal
         if (this.state.password == this.state.passwordConfirmation) {
-            axios.post("http://flip1.engr.oregonstate.edu:4221/register", this.state).then(res => {
+            axios.post("http://flip1.engr.oregonstate.edu:4225/register", this.state).then(res => {
                 alert(res.data.message);
                 this.clearInput();
             });

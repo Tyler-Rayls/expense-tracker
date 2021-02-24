@@ -9,7 +9,7 @@ const CreateFamily = () => {
     const createNewFamily = (event) => {
         event.preventDefault();
         if (surname != "") {
-            axios.post("http://flip1.engr.oregonstate.edu:4221/family/", {surname, user}).then(res => {
+            axios.post("http://flip1.engr.oregonstate.edu:4225/family/", {surname, user}).then(res => {
                 alert(res.data.message);
             });
         }

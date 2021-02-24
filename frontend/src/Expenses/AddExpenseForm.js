@@ -1,23 +1,65 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import axios from 'axios';
 
-const AddExpenseForm = () => {
-    const user = useSelector((state) => state.user);
+class AddExpenseForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: []
+        };
+    };
 
+    componentDidMount() {
+        if (this.props.currentUser != null) {
+        //Request cards with matching userID from PaymentMethods
+        axios({
+            method: 'post',
+            url: "http://flip1.engr.oregonstate.edu:4225/paymentMethods",
+            headers: {},
+            data: {
+                userID: this.props.currentUser, //Get unique userID
+            }
+        }).then(response => {
+            var cardIDList = []
+            response.data.map(item => 
+                {cardIDList.push(item.cardID)});
+        //Request cards with matching cardIDs from CreditCards
+        axios({
+            method: 'post',
+            url: "http://flip1.engr.oregonstate.edu:4225/creditCardsForDropdown",
+            headers: {},
+            data: {
+                cardID: cardIDList, //Get unique cardID
+            }
+        }
+        ).then(res => {
+            this.setState({data: res.data});
+        })
+            .catch(function (error) {
+                console.log(error);
+            });
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }};
+
+    render() {
+    const { data } = this.state;
     return(
         <>
             <div className="col-2">
-                <input type="text" className="form-control" placeholder="Amount"></input>
+                <input type="number" className="form-control" placeholder="Amount" step="0.01"></input>
             </div>
-            <div className="col-2">
-                <input type="text" class="form-control" placeholder="Date"></input>
+            <div className="col-3">
+                <input type="text" class="form-control" placeholder="Date (YYYY-MM-DD)"></input>
             </div>
             <div className="col-3">
                 <select className="form-select">
                     <option selected>Select a payment method...</option>
-                    <option value="1">Chase Sapphire</option>
-                    <option value="2">Chase Unlimited</option>
-                    <option value="3">Delta SkyMiles Amex</option> 
+                    {data.map(item =>
+                            <option value = {item.cardID}>{item.cardName}</option>
+                    )}
                 </select>
             </div>
             <div className="col-3">
@@ -35,6 +77,6 @@ const AddExpenseForm = () => {
             </div>
         </>
     )
-}
+}};
 
 export default AddExpenseForm;
