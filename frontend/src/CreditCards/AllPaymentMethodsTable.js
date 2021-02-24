@@ -7,7 +7,7 @@ class AllPaymentMethodsTable extends React.Component {
         super(props);
         this.state = {
             data: []
-        }}
+        }};
       
     
       componentDidMount() {
@@ -23,7 +23,6 @@ class AllPaymentMethodsTable extends React.Component {
 
     render(){
         const {data} = this.state;
-        console.log(data)
     return (
             <table class="table table-sm mt-4 text-center">
                 <thead>
@@ -48,7 +47,7 @@ class AllPaymentMethodsTable extends React.Component {
                         <td>{item.dining}%</td>
                         <td>{item.otherReward}%</td>
                         <td>${item.annualFee}</td>
-                        <td><button type="button" className="btn btn-sm btn-success">Add Payment Method</button></td>
+                        <td><button type="button" className="btn btn-sm btn-success" onClick={this.addCard}>Add Payment Method</button></td>
                     </tr>
                 )}
                 </tbody>
