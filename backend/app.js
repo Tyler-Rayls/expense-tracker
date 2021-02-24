@@ -99,19 +99,18 @@ app.post("/family", (req, res) => {
 
 app.get("/family", (req, res) => {
     var mysql = req.app.get('mysql');
-    var sql = "SELECT Families.familyID, Users.firstName, Users.lastNAme, Families.surname, FamilyMembers.isHead FROM Families \
+    var sql = "SELECT Families.familyID, Users.userID, Users.firstName, Users.lastName, Families.surname, FamilyMembers.isHead FROM Families \
                INNER JOIN FamilyMembers ON Families.familyID = FamilyMembers.familyID \
                INNER JOIN Users ON Users.userID = FamilyMembers.userID \
                WHERE FamilyMembers.familyID IN (SELECT familyID from FamilyMembers WHERE userID = ?) \
                ORDER BY Families.familyID, FamilyMembers.isHead DESC;";
-    var inserts = [req.query.user.userID]
-    sql = mysql.pool.query(sql, function(error, results, fields) {
-        console.log(results);
-        // var queryResults = [];
-        // results.forEach ((row) =>{
-        //     queryResults.push(row)
-        // });
-        // res.send(queryResults);
+    var inserts = [req.query.userID];
+    sql = mysql.pool.query(sql, inserts, function(error, results, fields) {
+        var queryResults = [];
+        results.forEach ((row) =>{
+            queryResults.push(row)
+        });
+        res.send(queryResults);
     });
 });
 

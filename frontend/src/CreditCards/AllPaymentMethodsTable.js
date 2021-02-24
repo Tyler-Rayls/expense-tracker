@@ -7,20 +7,19 @@ class AllPaymentMethodsTable extends React.Component {
         super(props);
         this.state = {
             data: []
-        }}
+        }
+    }
       
-      componentDidMount() {
-        axios.get("http://flip1.engr.oregonstate.edu:4221/creditCards").then(res => {
-                this.setState({data: res.data});
-            })
-            .catch(function (error) {
-                console.log(error);
-             });
-            }
+    componentDidMount() {
+        axios.get("http://flip1.engr.oregonstate.edu:4221/creditcards").then(res => {
+            this.setState({data: res.data});
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
 
     render(){
         const {data} = this.state;
-        console.log(data)
         return (
                 <table class="table table-sm mt-4 text-center">
                     <thead>
