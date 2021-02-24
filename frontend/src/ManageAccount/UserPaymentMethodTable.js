@@ -12,6 +12,7 @@ class UserPaymentMethodTable extends React.Component {
 
     //Get request creditCardsForPaymentMethodsTable for all cardIDs
     componentDidMount() {
+        if (this.props.currentUser != null) {
         //GET USER ID
         //Request cards with matching userID from PaymentMethods
         axios({
@@ -46,7 +47,7 @@ class UserPaymentMethodTable extends React.Component {
         .catch(function (error) {
             console.log(error);
         });
-    };
+    }};
 
     render() {
         const { data } = this.state;
