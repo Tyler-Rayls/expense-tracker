@@ -12,26 +12,25 @@ class AllPaymentMethodsTable extends React.Component {
     };
     
     componentDidMount() {
-    axios.get("http://flip1.engr.oregonstate.edu:4225/creditCards").then(res => {
+        axios.get("http://flip1.engr.oregonstate.edu:4221/creditCards").then(res => {
             this.setState({data: res.data});
         })
         .catch(function (error) {
             console.log(error);
-            });
-        }
+        });
+    }
 
     addCard(cardID) {
         if (this.props.currentUser != null) {
-        axios.post("http://flip1.engr.oregonstate.edu:4225/addPaymentMethod", {cardID: cardID, userID: this.props.currentUser}).then(res => {
-            alert(res.data.message);
-        })
-    }
-};
-    
+            axios.post("http://flip1.engr.oregonstate.edu:4221/addPaymentMethod", {cardID: cardID, userID: this.props.currentUser}).then(res => {
+                alert(res.data.message);
+            })
+        }
+    };
 
     render(){
         const {data} = this.state;
-    return (
+        return (
             <table class="table table-sm mt-4 text-center">
                 <thead>
                 <tr>
@@ -59,6 +58,7 @@ class AllPaymentMethodsTable extends React.Component {
                     </tr>)}
                 </tbody>
                 </table>
+
         )
     };
 }

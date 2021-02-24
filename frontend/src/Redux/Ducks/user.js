@@ -14,10 +14,10 @@ export const logout = () => ({
 });
 
 const initialState = {
-    userID: null,
-    firstName: "",
-    lastName: "",
-    email: ""
+    userID: 3,
+    firstName: "Elon",
+    lastName: "Musk",
+    email: "elon@tesla.com"
 };
 
 export default (state = initialState, action) => {
