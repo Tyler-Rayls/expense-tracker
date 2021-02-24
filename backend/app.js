@@ -174,5 +174,4 @@ app.post("/expensesInsert", (req, res) => {
     });
 });
 
-
 app.listen(port, () => console.log(`Express is listening on the port ${port}`));

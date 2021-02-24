@@ -9,7 +9,7 @@ var families = {};
 
 const FamilyMain = () => {
     const user = useSelector(state => state.user);
-    const [loop, setLoop] = useState(0);
+    const [reload, setReload] = useState(0);
 
     useEffect(() => {
         families = {};
@@ -28,14 +28,14 @@ const FamilyMain = () => {
                     families[row.familyID].members = [...families[row.familyID].members, [`${row.firstName} ${row.lastName}`, row.userID]];
                 }
             }
+            setReload(reload + 1);
         });
-    }, [families]);  
+    }, [user, reload]);  
 
     return (
         <div className="container mt-4">
             <h2 className="text-center">Families</h2>
             <div className="row justify-content-center mt-4">
-                {console.log(families)}
                 {Object.entries(families).map(family => <Family familyID={family[1].familyID} members={family[1].members} surname={family[1].surname} head={family[1].head} />)}
                 <CreateFamily />
             </div>
