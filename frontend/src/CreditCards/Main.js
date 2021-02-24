@@ -1,8 +1,11 @@
 import React from 'react';
 import AddCardForm from './AddCardForm';
 import AllPaymentsMethodTable from './AllPaymentMethodsTable';
+import { useSelector } from 'react-redux';
+
 
 const CreditCardMain = () => {
+    const user = useSelector(state => state.user)
     return (
         <div className="container">
             <div className="row mt-4">
@@ -14,7 +17,7 @@ const CreditCardMain = () => {
                 </div>
                 <hr className="mb-2"/>
                 <div className="row mt-2 justify-content-evenly">
-                    <AllPaymentsMethodTable />
+                    <AllPaymentsMethodTable currentUser = {user.userID}/>
                 </div>
             </div>
         </div>

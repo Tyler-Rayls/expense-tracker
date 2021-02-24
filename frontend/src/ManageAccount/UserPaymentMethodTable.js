@@ -13,7 +13,6 @@ class UserPaymentMethodTable extends React.Component {
     //Get request creditCardsForPaymentMethodsTable for all cardIDs
     componentDidMount() {
         if (this.props.currentUser != null) {
-        //GET USER ID
         //Request cards with matching userID from PaymentMethods
         axios({
             method: 'post',
@@ -26,7 +25,6 @@ class UserPaymentMethodTable extends React.Component {
             var cardIDList = []
             response.data.map(item => 
                 {cardIDList.push(item.cardID)});
-            console.log(cardIDList); //Collect all cardIDs
         //Request cards with matching cardIDs from CreditCards
         axios({
             method: 'post',
@@ -37,7 +35,6 @@ class UserPaymentMethodTable extends React.Component {
             }
         }
         ).then(res => {
-            console.log(res.data) //DISPLAY THIS AT THE END
             this.setState({data: res.data});
         })
             .catch(function (error) {

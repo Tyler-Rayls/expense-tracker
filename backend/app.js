@@ -4,7 +4,7 @@ var mysql = require('./dbcon.js');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 4223;
+const port = 4221;
 const corsOptions = {
     origin: "http://flip1.engr.oregonstate.edu:4220",
     optionsSuccessStatus: 200
@@ -50,7 +50,7 @@ app.get("/login", (req, res) => {
 
 app.get("/creditCards", (req,res) =>{
     var mysql = req.app.get('mysql');
-    var sql = "SELECT cardName, gas, grocery, travel, dining, otherReward, annualFee FROM CreditCards";
+    var sql = "SELECT cardID, cardName, gas, grocery, travel, dining, otherReward, annualFee FROM CreditCards";
     sql = mysql.pool.query(sql, function(error, results, fields) {
         var queryResults = [];
         results.forEach ((row) =>{
@@ -75,8 +75,6 @@ app.post("/creditCards", (req, res) => {
 });
 
 app.post("/creditCardsForPaymentMethodsTable", (req,res) =>{
-    console.log(req.body)
-    console.log('yo')
     var mysql = req.app.get('mysql');
     var sql = "SELECT cardName, gas, grocery, travel, dining, otherReward, annualFee FROM CreditCards WHERE cardID IN (?)";
     insert = [req.body.cardID]
@@ -85,14 +83,11 @@ app.post("/creditCardsForPaymentMethodsTable", (req,res) =>{
         results.forEach ((row) =>{
             queryResults.push(row)
         })
-        console.log(queryResults)
         res.send(queryResults);
 }
 )});
 
 app.post("/paymentMethods", (req, res) => {
-    console.log(req.body)
-    console.log('yo2')
     var mysql = req.app.get('mysql');
     var sql = "SELECT paymentID, userID, cardID FROM PaymentMethods WHERE userID = ?";
     insert = [req.body.userID]
@@ -106,5 +101,18 @@ app.post("/paymentMethods", (req, res) => {
 })
 });
 
+app.post("/addPaymentMethod", (req, res) => {
+    var mysql = req.app.get('mysql');
+    var sql = "INSERT INTO PaymentMethods (cardID, userID) VALUES (?, ?)";
+    var inserts = [req.body.cardID, req.body.userID];
+    sql = mysql.pool.query(sql, inserts, function(error, results) {
+        if (error) {
+            var message = "Error adding card. Please make sure you have not already added this card."
+        } else {
+            var message = `Successfully added card to payment methods.`;
+        }
+        res.send({message});
+    });
+});
 
 app.listen(port, () => console.log(`Express is listening on the port ${port}`));
