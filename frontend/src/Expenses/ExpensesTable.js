@@ -7,55 +7,104 @@ class ExpenseTable extends React.Component {
         this.state = {
             data: []
         };
+        this.getTable = this.getTable.bind(this);
     };
 
-    componentDidMount() {
+    getTable() {
         if (this.props.currentUser != null) {
-        //Request cards with matching userID from PaymentMethods
-        axios({
-            method: 'post',
-            url: "http://flip1.engr.oregonstate.edu:4221/expensesTable",
-            headers: {},
-            data: {
-                userID: this.props.currentUser, //Get unique userID
-            }
-        }).then(response => {
-            console.log(response.data)
-            this.setState({data: response.data})
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-    }};
+            //Request cards with matching userID from PaymentMethods
+            axios({
+                method: 'post',
+                url: "http://flip1.engr.oregonstate.edu:4221/expensesTable",
+                headers: {},
+                data: {
+                    userID: this.props.currentUser, //Get unique userID
+                }
+            }).then(response => {
+                console.log(response.data)
+                this.setState({ data: response.data })
+            })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    }
 
-    render(){
-    const { data } = this.state;
-    return(
-        <table className="table">
-            <thead>
-                <tr>
-                    <th>Amount</th>
-                    <th>Date</th>
-                    <th>Payment Method</th>
-                    <th>Category</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-            {data.map(item => 
-                <tr>
-                    <td>${item.amount}</td>
-                    <td>{item.date.slice(0,10)}</td>
-                    <td>{item.cardName}</td>
-                    <td>{item.category}</td>
-                    <td><button type="button" className="btn btn-primary">Edit</button></td>
-                    <td><button type="button" className="btn btn-danger">Delete</button></td>
-                </tr>)}
-            </tbody>
-        </table>
-    )
-}
+    month(monthReq) {
+        if (this.props.currentUser != null) {
+            //Request cards with matching userID from PaymentMethods
+            axios({
+                method: 'post',
+                url: "http://flip1.engr.oregonstate.edu:4221/filterMonth",
+                headers: {},
+                data: {
+                    userID: this.props.currentUser, //Get unique userID
+                    month: monthReq
+                }
+            }).then(response => {
+                console.log(response.data)
+                this.setState({ data: response.data })
+            })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    }
+
+    category(catReq) {
+        if (this.props.currentUser != null) {
+            //Request cards with matching userID from PaymentMethods
+            axios({
+                method: 'post',
+                url: "http://flip1.engr.oregonstate.edu:4221/filterCategory",
+                headers: {},
+                data: {
+                    userID: this.props.currentUser, //Get unique userID
+                    category:catReq
+                }
+            }).then(response => {
+                console.log(response.data)
+                this.setState({ data: response.data })
+            })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    }
+
+    componentDidMount() {
+        this.getTable()
+    };
+
+
+    render() {
+        const { data } = this.state;
+        return (
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Payment Method</th>
+                        <th>Category</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.map(item =>
+                        <tr>
+                            <td>${item.amount}</td>
+                            <td>{item.date.slice(0, 10)}</td>
+                            <td>{item.cardName}</td>
+                            <td>{item.category}</td>
+                            <td><button type="button" className="btn btn-primary">Edit</button></td>
+                            <td><button type="button" className="btn btn-danger">Delete</button></td>
+                        </tr>)}
+                </tbody>
+            </table>
+        )
+    }
 }
 
 export default ExpenseTable;

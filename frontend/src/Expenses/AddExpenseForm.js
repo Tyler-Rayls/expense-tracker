@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import CascadingDropdown from './CascadingDropdown';
+
 
 class AddExpenseForm extends React.Component {
     activeUser = this.props.currentUser
@@ -17,7 +19,8 @@ class AddExpenseForm extends React.Component {
         };
         this.clearInput = this.clearInput.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.addExpense = this.addExpense.bind(this);}
+        this.addExpense = this.addExpense.bind(this);
+        this.sendToTable = React.createRef()};
 
     componentDidMount() {
         if (this.props.currentUser != null) {
@@ -61,8 +64,9 @@ class AddExpenseForm extends React.Component {
     addExpense(event) {
         event.preventDefault();
         axios.post("http://flip1.engr.oregonstate.edu:4221/addExpense", this.state.values).then(res => {
-            alert(res.data.message);
-            this.clearInput();
+            this.clearInput()
+            this.sendToTable.current.clearFilter();
+            this.sendToTable.current.sendToTable();
         })
     };
 
@@ -80,7 +84,7 @@ class AddExpenseForm extends React.Component {
                 <select className="form-select" name="paymentID" onChange={this.handleChange} value={this.state.paymentID}>
                     <option selected>Select a payment method...</option>
                     {data.map(item =>
-                            <option value = {item.cardID} >{item.cardName}</option>
+                            <option value = {item.paymentID} >{item.cardName}</option>
                     )}
 
                 </select>
@@ -98,6 +102,10 @@ class AddExpenseForm extends React.Component {
             <div className="col-1 text-center">
                 <button type="button" className="btn btn-outline-primary" onClick={this.addExpense}><i class="bi bi-plus-circle"></i></button>
             </div>
+            <hr className="mb-5"/>
+                <div className="row mb-1">
+                    <CascadingDropdown currentUser = {this.activeUser} cardList = {this.state.data} ref={this.sendToTable}/>
+                </div>
         </>
     )
 }};

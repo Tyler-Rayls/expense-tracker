@@ -77,7 +77,7 @@ app.post("/creditcards", (req, res) => {
 
 app.post("/creditCardsForExpenseAndPaymentMethods", (req, res) => {
     var mysql = req.app.get('mysql');
-    var sql = "SELECT CreditCards.cardID, CreditCards.cardName, CreditCards.gas, CreditCards.grocery, CreditCards.travel, CreditCards.dining, CreditCards.otherReward, CreditCards.annualFee FROM CreditCards \
+    var sql = "SELECT PaymentMethods.paymentID, CreditCards.cardID, CreditCards.cardName, CreditCards.gas, CreditCards.grocery, CreditCards.travel, CreditCards.dining, CreditCards.otherReward, CreditCards.annualFee FROM CreditCards \
     INNER JOIN PaymentMethods ON PaymentMethods.cardID = CreditCards.cardID \
     WHERE PaymentMethods.userID = ?;";
     insert = [req.body.userID]
@@ -161,9 +161,9 @@ app.post("/addPaymentMethod", (req, res) => {
 
     app.post("/expensesTable", (req, res) => {
         var mysql = req.app.get('mysql');
-        var sql = "SELECT Expenses.userID, Expenses.amount, Expenses.date, Expenses.category, CreditCards.cardName FROM Expenses \
-        INNER JOIN PaymentMethods ON PaymentMethods.paymentID = Expenses.paymentID \
-        INNER JOIN CreditCards ON CreditCards.cardID = PaymentMethods.cardID \
+        var sql = "SELECT PaymentMethods.paymentID, Expenses.userID, Expenses.amount, Expenses.date, Expenses.category, CreditCards.cardName FROM Expenses \
+        INNER JOIN PaymentMethods ON PaymentMethods.paymentID = Expenses.paymentID\
+        INNER JOIN CreditCards ON CreditCards.cardID = PaymentMethods.cardID\
         WHERE Expenses.userID = ?;";
         insert = [req.body.userID]
         sql = mysql.pool.query(sql, insert, function (error, results, fields) {
@@ -190,5 +190,41 @@ app.post("/addPaymentMethod", (req, res) => {
             res.send({ message });
         });
     });
+
+    app.post("/filterMonth", (req, res) => {
+        var mysql = req.app.get('mysql');
+        var sql = "SELECT PaymentMethods.paymentID, Expenses.userID, Expenses.amount, Expenses.date, Expenses.category, CreditCards.cardName FROM Expenses \
+        INNER JOIN PaymentMethods ON PaymentMethods.paymentID = Expenses.paymentID\
+        INNER JOIN CreditCards ON CreditCards.cardID = PaymentMethods.cardID\
+        WHERE Expenses.userID = ? AND MONTHNAME(Expenses.date) = ?;";
+        insert = [req.body.userID, req.body.month]
+        sql = mysql.pool.query(sql, insert, function (error, results, fields) {
+            var queryResults = [];
+            results.forEach((row) => {
+                queryResults.push(row)
+            })
+            console.log(queryResults);
+            res.send(queryResults);
+        });
+    });
+
+    app.post("/filterCategory", (req, res) => {
+        var mysql = req.app.get('mysql');
+        var sql = "SELECT PaymentMethods.paymentID, Expenses.userID, Expenses.amount, Expenses.date, Expenses.category, CreditCards.cardName FROM Expenses \
+        INNER JOIN PaymentMethods ON PaymentMethods.paymentID = Expenses.paymentID\
+        INNER JOIN CreditCards ON CreditCards.cardID = PaymentMethods.cardID\
+        WHERE Expenses.userID = ? AND Expenses.category = ?;";
+        insert = [req.body.userID, req.body.category]
+        sql = mysql.pool.query(sql, insert, function (error, results, fields) {
+            var queryResults = [];
+            results.forEach((row) => {
+                queryResults.push(row)
+            })
+            console.log(queryResults);
+            res.send(queryResults);
+        });
+    });
+
+    
 
     app.listen(port, () => console.log(`Express is listening on the port ${port}`));

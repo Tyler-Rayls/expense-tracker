@@ -1,8 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import AllPaymentsMethodTable from './AllPaymentMethodsTable';
 
 
-class AddExpenseForm extends React.Component {
+class AddCardForm extends React.Component {
+    activeUser = this.props.currentUser
     constructor(props) {
         super(props);
         this.state = {
@@ -17,6 +19,7 @@ class AddExpenseForm extends React.Component {
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.addCard = this.addCard.bind(this);
+        this.updateTable = React.createRef();
     };
 
     handleNameChange(event) {
@@ -39,7 +42,7 @@ class AddExpenseForm extends React.Component {
             travel: "",
             dining: "",
             otherReward: "",
-            annualFee: ""
+            annualFee: "",
         });
     };
 
@@ -48,7 +51,8 @@ class AddExpenseForm extends React.Component {
         axios.post("http://flip1.engr.oregonstate.edu:4221/creditCards", this.state).then(res => {
             alert(res.data.message);
             this.clearInput();
-        }).then(res => { window.location.reload(); });
+            this.updateTable.current.getTable();
+        });
     };
 
 
@@ -71,7 +75,7 @@ class AddExpenseForm extends React.Component {
                     <input name="dining" type="number" class="form-control" placeholder="Dining" onChange={this.handleInputChange} value={this.state.dining}></input>
                 </div>
                 <div className="col">
-                    <input name="otherReward" type="number" class="form-control" placeholder="Other" onChange={this.handleInputChange} value={this.state.other}></input>
+                    <input name="otherReward" type="number" class="form-control" placeholder="Other" onChange={this.handleInputChange} value={this.state.otherReward}></input>
                 </div>
                 <div className="col-2">
                     <input name="annualFee" type="number" class="form-control" placeholder="Annual Fee" onChange={this.handleInputChange} value={this.state.annualFee} step="0.01"></input>
@@ -79,9 +83,14 @@ class AddExpenseForm extends React.Component {
                 <div className="col">
                     <button type="button" className="btn btn-outline-primary text-right" onClick={this.addCard}><i class="bi bi-plus-circle"></i></button>
                 </div>
+
+                <hr className="mb-2"/>
+                <div className="row mt-2 justify-content-evenly">
+                    <AllPaymentsMethodTable currentUser = {this.activeUser} ref={this.updateTable}/>
+                </div>
             </>
         )
     }
 }
 
-export default AddExpenseForm;
+export default AddCardForm;
