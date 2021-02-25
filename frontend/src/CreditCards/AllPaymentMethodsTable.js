@@ -66,6 +66,7 @@ class AllPaymentMethodsTable extends React.Component {
                         </tr>)}
                 </tbody>
             </table>
+
         )
     };
 }

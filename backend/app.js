@@ -188,8 +188,10 @@ app.post("/addPaymentMethod", (req, res) => {
                 var message = "Expense was successfully added.";
             }
             res.send({ message });
+
         });
     });
+
 
     app.post("/filterMonth", (req, res) => {
         var mysql = req.app.get('mysql');
@@ -228,3 +230,21 @@ app.post("/addPaymentMethod", (req, res) => {
     
 
     app.listen(port, () => console.log(`Express is listening on the port ${port}`));
+
+
+app.post("/expensesInsert", (req, res) => {
+    var mysql = req.app.get('mysql');
+    var sql = "INSERT INTO Expenses (userID, amount, date, category, paymentID) VALUES (?, ?, ?, ?, ?)";
+    var inserts = [req.body.userID, req.amount, req.body.date, req.body.category, req.body.paymentID];
+    sql = mysql.pool.query(sql, inserts, function (error, results) {
+        if (error) {
+            var message = "Error adding expense."
+        } else {
+            var message = "Expense added.";
+        }
+        res.send({ message });
+    });
+});
+
+app.listen(port, () => console.log(`Express is listening on the port ${port}`));
+
