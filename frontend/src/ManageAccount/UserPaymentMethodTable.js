@@ -22,7 +22,6 @@ class UserPaymentMethodTable extends React.Component {
                 userID: this.props.currentUser, //Get unique userID
             }
         }).then(response => {
-            console.log(response.data)
             this.setState({data: response.data})
         })
         .catch(function (error) {
