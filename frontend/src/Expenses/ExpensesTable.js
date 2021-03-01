@@ -72,9 +72,6 @@ class ExpenseTable extends React.Component {
         }
     }
 
-
-
-
     category(catReq) {
         if (this.props.currentUser != null) {
             //Request cards with matching userID from PaymentMethods
@@ -95,6 +92,25 @@ class ExpenseTable extends React.Component {
                 });
         }
     }
+
+    removeExpense(expenseID) {
+        if (this.props.currentUser != null) {
+            console.log(this.state.data)
+            console.log(this.state.data.expenseID)
+            axios.put("http://flip1.engr.oregonstate.edu:4221/removeExpense", { expenseID: expenseID }).then(res => {
+                alert(res.data.message);
+                this.getTable();
+            });
+        }
+    };
+
+    // editExpense(expenseID) {
+    //     if (this.props.currentUser != null) {
+    //         axios.post("http://flip1.engr.oregonstate.edu:4221/editExpense", { expenseID: expenseID  }).then(res => {
+    //             this.getTable();
+    //         });
+    //     }
+    // };
 
     componentDidMount() {
         this.getTable()
@@ -122,8 +138,8 @@ class ExpenseTable extends React.Component {
                             <td>{item.date.slice(0, 10)}</td>
                             <td>{item.cardName}</td>
                             <td>{item.category}</td>
-                            <td><button type="button" className="btn btn-primary">Edit</button></td>
-                            <td><button type="button" className="btn btn-danger">Delete</button></td>
+                            {/* <td><button type="button" className="btn btn-primary" onClick={() => this.editExpense(item.cardID)}>Edit</button></td> */}
+                            <td><button type="button" className="btn btn-danger" onClick={() => this.removeExpense(item.expenseID)}>Delete</button></td>
                         </tr>)}
                 </tbody>
             </table>

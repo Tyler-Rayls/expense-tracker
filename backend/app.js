@@ -170,7 +170,7 @@ app.get("/family", (req, res) => {
 //Display expenses from Expenses table specific to the current user.
 app.post("/expensesTable", (req, res) => {
     var mysql = req.app.get('mysql');
-    var sql = "SELECT PaymentMethods.paymentID, Expenses.userID, Expenses.amount, Expenses.date, Expenses.category, CreditCards.cardName FROM Expenses \
+    var sql = "SELECT Expenses.expenseID, PaymentMethods.paymentID, Expenses.userID, Expenses.amount, Expenses.date, Expenses.category, CreditCards.cardName FROM Expenses \
     INNER JOIN PaymentMethods ON PaymentMethods.paymentID = Expenses.paymentID\
     INNER JOIN CreditCards ON CreditCards.cardID = PaymentMethods.cardID\
     WHERE Expenses.userID = ?;";
@@ -237,6 +237,7 @@ app.post("/filterCategory", (req, res) => {
     });
 });
 
+//Display expenses from Expenses table specific to the current user and selected credit card.
 app.post("/filterCard", (req, res) => {
     var mysql = req.app.get('mysql');
     var sql = "SELECT PaymentMethods.paymentID, Expenses.userID, Expenses.amount, Expenses.date, Expenses.category, CreditCards.cardName FROM Expenses \
@@ -254,8 +255,30 @@ app.post("/filterCard", (req, res) => {
     });
 });
 
+app.put("/removeExpense", (req, res) => {
+    var mysql = req.app.get('mysql')
+    var sql = "UPDATE Expenses SET userID = NULL, paymentID = NULL WHERE expenseID = ?"
+    insert = [req.body.expenseID]
+    sql = mysql.pool.query(sql, insert, function (error, results, fields) {
+        if (error) {
+            var message = "Error. Please try again."
+        } else {
+            var message = "Expense removed.";
+        }
+        res.send({ message });
+})});
+
+// app.put("/editExpense", (req, res) => {
+//     var mysql = req.app.get('mysql')
+//     var sql = "UPDATE Expenses SET amount = ?, data = ?, paymentID = ?, category = ?, paymentID = NULL WHERE expenseID = ?"
+//     insert = [req.body.amount, req.body.date, req.body.paymentID, req.body.category, req.body.expenseID]
+//     sql = mysql.pool.query(sql, insert, function (error, results, fields) {
+//         if (error) {
+//             var message = "Error. Please try again."
+//         } else {
+//             var message = "Expense removed.";
+//         }
+//         res.send({ message });
+// })});
 
 app.listen(port, () => console.log(`Express is listening on the port ${port}`));
-
-
-
