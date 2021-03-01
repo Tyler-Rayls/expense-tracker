@@ -1,38 +1,28 @@
 [
     {
         "category": "Payment Method",
-        "values": [
-            {
-                "name": "Chase Saphhire"
-            },
-            {
-                "name": "Chase Unlimited"
-            },
-            {
-                "name": "Delta SkyMiles Amex"
-            }
-        ]
+        "values": []
     },
     {
         "category": "Payment Category",
         "values": [
             {
-                "name": "Gas"
+                "cardName": "Gas"
             },
             {
-                "name": "Grocery"
+                "cardName": "Grocery"
             },
             {
-                "name": "Travel"
+                "cardName": "Travel"
             },
             {
-                "name": "Dining"
+                "cardName": "Dining"
             },
             {
-                "name": "Other"
+                "cardName": "Other"
             },
             {
-                "name": "None"
+                "cardName": "None"
             }
         ]
     },
@@ -40,40 +30,40 @@
         "category": "Month",
         "values": [
             {
-                "name": "January"
+                "cardName": "January"
             },
             {
-                "name": "February"
+                "cardName": "February"
             },
             {
-                "name": "March"
+                "cardName": "March"
             },
             {
-                "name": "April"
+                "cardName": "April"
             },
             {
-                "name": "May"
+                "cardName": "May"
             },
             {
-                "name": "June"
+                "cardName": "June"
             },
             {
-                "name": "July"
+                "cardName": "July"
             },
             {
-                "name": "August"
+                "cardName": "August"
             },
             {
-                "name": "September"
+                "cardName": "September"
             },
             {
-                "name": "October"
+                "cardName": "October"
             },
             {
-                "name": "November"
+                "cardName": "November"
             },
             {
-                "name": "December"
+                "cardName": "December"
             }
         ]
     }

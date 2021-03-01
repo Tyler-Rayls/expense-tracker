@@ -51,6 +51,30 @@ class ExpenseTable extends React.Component {
         }
     }
 
+    cardFilter(card) {
+        if (this.props.currentUser != null) {
+            //Request cards with matching userID from PaymentMethods
+            axios({
+                method: 'post',
+                url: "http://flip1.engr.oregonstate.edu:4221/filterCard",
+                headers: {},
+                data: {
+                    userID: this.props.currentUser, //Get unique userID
+                    cardName: card
+                }
+            }).then(response => {
+                console.log(response.data)
+                this.setState({ data: response.data })
+            })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+    }
+
+
+
+
     category(catReq) {
         if (this.props.currentUser != null) {
             //Request cards with matching userID from PaymentMethods

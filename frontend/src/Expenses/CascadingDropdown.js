@@ -5,7 +5,6 @@ import data from './expenseData.json';
 
 class CascadingDropdown extends React.Component {
   activeUser = this.props.currentUser
-  cards = this.props.cardList
   constructor(props) {
     super(props);
     this.state = {
@@ -22,11 +21,21 @@ class CascadingDropdown extends React.Component {
   };
 
   handleFilterChange(event) {
+    if (event.category == "Payment Method") {
+    console.log(this.props.cardList);
     this.setState({
       filterCategory: event,
       filterValue: "",
-      valueList: event.values,
-    });
+      valueList: this.props.cardList,
+    })}
+    else {
+      console.log(event.values);
+      this.setState({
+        filterCategory: event,
+        filterValue: "",
+        valueList: event.values,
+      })
+    };
   };
 
   handleValueChange(event) {
@@ -42,11 +51,11 @@ class CascadingDropdown extends React.Component {
 
   buttonPress() {
     if (this.state.filterCategory.category == 'Payment Category') {
-      this.updateTable.current.category(this.state.filterValue.name)
+      this.updateTable.current.category(this.state.filterValue.cardName)
     } else if (this.state.filterCategory.category == 'Payment Method') {
-      console.log('WIP')
+      this.updateTable.current.cardFilter(this.state.filterValue.cardName)
     } else if (this.state.filterCategory.category == 'Month') {
-      this.updateTable.current.month(this.state.filterValue.name)
+      this.updateTable.current.month(this.state.filterValue.cardName)
     }
   };
 
@@ -78,7 +87,7 @@ class CascadingDropdown extends React.Component {
               value={this.state.filterValue}
               options={this.state.valueList}
               onChange={this.handleValueChange}
-              getOptionLabel={x => x.name}
+              getOptionLabel={x => x.cardName}
             />
           </div>
           <div className="col-2">
