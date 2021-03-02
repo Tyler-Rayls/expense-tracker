@@ -8,10 +8,21 @@ class UserPaymentMethodTable extends React.Component {
         this.state = {
             data: []
         };
+        this.getTable = this.getTable.bind(this);
     };
 
-    //Get request creditCardsForPaymentMethodsTable for all cardIDs
-    componentDidMount() {
+    removePaymentMethod(paymentID) {
+        if (this.props.currentUser != null) {
+            console.log(this.state.data)
+            console.log(this.state.data.expenseID)
+            axios.put("http://flip1.engr.oregonstate.edu:4221/removePaymentMethod", { paymentID: paymentID }).then(res => {
+                alert(res.data.message);
+                this.getTable();
+            });
+        }
+    };
+
+    getTable() {
         if (this.props.currentUser != null) {
         //Request cards with matching userID from PaymentMethods
         axios({
@@ -28,6 +39,13 @@ class UserPaymentMethodTable extends React.Component {
             console.log(error);
         });
     }};
+
+    //Get request creditCardsForPaymentMethodsTable for all cardIDs
+    componentDidMount() {
+        this.getTable()
+    };
+
+
 
     render() {
         const { data } = this.state;
@@ -56,7 +74,7 @@ class UserPaymentMethodTable extends React.Component {
                                 <td>{item.dining}%</td>
                                 <td>{item.otherReward}%</td>
                                 <td>${item.annualFee}</td>
-                                <td><button type="button" className="btn btn-sm btn-danger">Remove</button></td>
+                                <td><button type="button" className="btn btn-sm btn-danger" onClick={() => this.removePaymentMethod(item.paymentID)}>Remove</button></td>
                             </tr>
                         )}
                     </tbody>

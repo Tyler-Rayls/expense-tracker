@@ -255,6 +255,19 @@ app.post("/filterCard", (req, res) => {
     });
 });
 
+app.put("/removePaymentMethod", (req, res) => {
+    var mysql = req.app.get('mysql')
+    var sql = "DELETE from PaymentMethods WHERE paymentID = ?"
+    insert = [req.body.paymentID]
+    sql = mysql.pool.query(sql, insert, function (error, results, fields) {
+        if (error) {
+            var message = "Error. Please try again."
+        } else {
+            var message = "Payment method removed.";
+        }
+        res.send({ message });
+})});
+
 app.put("/removeExpense", (req, res) => {
     var mysql = req.app.get('mysql')
     var sql = "UPDATE Expenses SET userID = NULL, paymentID = NULL WHERE expenseID = ?"
