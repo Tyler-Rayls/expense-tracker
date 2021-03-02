@@ -27,6 +27,9 @@ const Navbar = () => {
                         <li className="nav-item">
                             <Link to="/accountSettings" className="nav-link" aria-current="page">Manage Account</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link to="/admin" className="nav-link" aria-current="page" style={{color: '#ff1a55'}}>Admin Tools</Link>
+                        </li>
                     </ul>
                     </div>
                 </div>

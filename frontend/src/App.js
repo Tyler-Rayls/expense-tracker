@@ -8,6 +8,7 @@ import Register from './Register/Main';
 import Index from './IndexOfFeatures';
 import AccountSettings from './ManageAccount/UserProfile';
 import CreditCardMain from './CreditCards/Main';
+import AdminMain from './Admin/Main'
 
 const App = () => {
 	return (
@@ -32,6 +33,9 @@ const App = () => {
 				</Route>
 				<Route path="/creditCards">
 					<CreditCardMain />
+				</Route>
+				<Route path = "/admin">
+					<AdminMain/>
 				</Route>
 				<Route path="/">
 					<Login />
