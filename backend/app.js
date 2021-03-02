@@ -281,4 +281,28 @@ app.put("/removeExpense", (req, res) => {
 //         res.send({ message });
 // })});
 
+app.get("/adminPaymentMethods", (req, res) => {
+    var mysql = req.app.get('mysql');
+    var sql = "SELECT paymentID, userID, cardID from PaymentMethods";
+    sql = mysql.pool.query(sql, function (error, results, fields) {
+        var queryResults = [];
+        results.forEach((row) => {
+            queryResults.push(row)
+        });
+        res.send(queryResults);
+    });
+});
+
+app.get("/adminUsers", (req, res) => {
+    var mysql = req.app.get('mysql');
+    var sql = "SELECT userID, email, firstName, lastName, password from Users";
+    sql = mysql.pool.query(sql, function (error, results, fields) {
+        var queryResults = [];
+        results.forEach((row) => {
+            queryResults.push(row)
+        });
+        res.send(queryResults);
+    });
+});
+
 app.listen(port, () => console.log(`Express is listening on the port ${port}`));
