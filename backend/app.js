@@ -125,6 +125,22 @@ app.post("/addPaymentMethod", (req, res) => {
     });
 });
 
+app.post("/family/join", (req, res) => {
+    console.log(req.body);
+    var mysql = req.app.get('mysql');
+    var sql = "INSERT INTO FamilyMembers (userID, familyID, isHead) VALUES (?, ?, 0)";
+    var inserts = [req.body.user.userID, req.body.familyID];
+    sql = mysql.pool.query(sql, inserts, function (error, results) {
+        if (error) {
+            var message = "There was an error joining the family.";
+            console.log(error);
+        } else {
+            var message = "You successfully joined the family!";
+        }
+        res.send({ message });
+    });
+});
+
 //Add a new row into Families table
 app.post("/family", (req, res) => {
     var mysql = req.app.get('mysql');

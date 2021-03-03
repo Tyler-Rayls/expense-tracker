@@ -16,6 +16,13 @@ const FamilySearch = () => {
             });
         }
     }
+
+    const joinFamily = (event, familyID) => {
+        event.preventDefault();
+        axios.post("http://flip1.engr.oregonstate.edu:4221/family/join", {familyID, user}).then(res => {
+            alert(res.data.message);
+        });
+    }
     
     return (
         <div className="row mt-4 justify-content-center">
@@ -42,7 +49,7 @@ const FamilySearch = () => {
                             <tr>
                                 <td>{family.familyID}</td>
                                 <td>{family.surname}</td>
-                                <td><button type="submit" className="btn btn-outline-success mt-3">Join</button></td>
+                                <td><button key={family.familyID} type="submit" className="btn btn-outline-success mt-3" onClick={(event, index) => joinFamily(event, family.familyID)}>Join</button></td>
                             </tr>)}
                     </tbody>
                 </table>
