@@ -4,6 +4,15 @@ import axios from 'axios';
 
 const Family = (props) => { 
     const user = useSelector((state) => state.user);
+    const head = props.head
+    var headVar = ""
+    if (head == "") {
+        headVar = "<Deleted User>"
+    }
+    else {
+        headVar = head
+    }
+
 
     const leaveFamily = (event) => {
         event.preventDefault();
@@ -23,7 +32,7 @@ const Family = (props) => {
                     <h5 className="card-title d-inline">{props.surname}</h5><p className="text-muted fw-light d-inline"> #{props.familyID}</p>
                 </div>
                 <ul className="list-group list-group-flush">
-                    <li key={props.head + props.familyID} className="list-group-item"><span className="text-muted fw-light">Head: </span>{props.head}</li>
+                    <li key={props.head + props.familyID} className="list-group-item"><span className="text-muted fw-light">Head: </span>{headVar}</li>
                     {props.members?.map(member => <li key={props.familyID + member[1] + 0} className="list-group-item">{member[0]}</li>)}
                 </ul>
                 <div className="card-body">

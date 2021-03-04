@@ -28,7 +28,7 @@ class UserInfoTable extends React.Component {
     };
 
     deleteUser() {
-        axios.put("http://flip1.engr.oregonstate.edu:4221/deleteUser", { userID: this.userID }).then(res => {
+        axios.delete("http://flip1.engr.oregonstate.edu:4221/deleteUser", { data: {userID: this.userID}}).then(res => {
             alert(res.data.message);
             window.location.reload(false);
         });

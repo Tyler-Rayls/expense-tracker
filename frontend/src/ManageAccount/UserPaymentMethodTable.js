@@ -13,9 +13,7 @@ class UserPaymentMethodTable extends React.Component {
 
     removePaymentMethod(paymentID) {
         if (this.props.currentUser != null) {
-            console.log(this.state.data)
-            console.log(this.state.data.expenseID)
-            axios.put("http://flip1.engr.oregonstate.edu:4221/removePaymentMethod", { paymentID: paymentID }).then(res => {
+            axios.delete("http://flip1.engr.oregonstate.edu:4221/removePaymentMethod", { data: {paymentID: paymentID}}).then(res => {
                 alert(res.data.message);
                 this.getTable();
             });

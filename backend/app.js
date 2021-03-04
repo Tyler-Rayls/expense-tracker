@@ -294,7 +294,7 @@ app.post("/filterCard", (req, res) => {
     });
 });
 
-app.put("/removePaymentMethod", (req, res) => {
+app.delete("/removePaymentMethod", (req, res) => {
     var mysql = req.app.get('mysql')
     var sql = "DELETE from PaymentMethods WHERE paymentID = ?"
     insert = [req.body.paymentID]
@@ -327,7 +327,7 @@ app.get("/getUser", (req, res) => {
     });
 });
 
-app.put("/deleteUser", (req, res) => {
+app.delete("/deleteUser", (req, res) => {
     var mysql = req.app.get('mysql')
     var sql = "DELETE from Users WHERE userID = ?"
     insert = [req.body.userID]
