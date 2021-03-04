@@ -9,7 +9,6 @@ const ExpensesMain = () => {
         <div className="container">
             <div className="row mt-4">
                 <h2 className="text-center">Expenses</h2>
-                <hr className="mb-0"/>
                 <div className="row justify-content-center m-2">
                     <AddExpense currentUser = {user.userID}/>
                 </div>

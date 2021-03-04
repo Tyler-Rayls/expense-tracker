@@ -84,7 +84,7 @@ class AddCardForm extends React.Component {
                     <button type="button" className="btn btn-outline-primary text-right" onClick={this.addCard}><i class="bi bi-plus-circle"></i></button>
                 </div>
 
-                <hr className="mb-2"/>
+                <hr className="mt-2 mb-0"/>
                 <div className="row mt-2 justify-content-evenly">
                     <AllPaymentsMethodTable currentUser = {this.activeUser} ref={this.updateTable}/>
                 </div>
