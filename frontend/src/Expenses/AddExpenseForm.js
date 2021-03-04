@@ -74,6 +74,7 @@ class AddExpenseForm extends React.Component {
     const { data } = this.state;
     return(
         <>
+            <hr className="mt-2 mb-2"/>
             <div className="col-2">
                 <input type="number" name="amount" className="form-control" placeholder="Amount" step="0.01" onChange={this.handleChange} value={this.state.amount}></input>
             </div>
@@ -102,7 +103,7 @@ class AddExpenseForm extends React.Component {
             <div className="col-1 text-center">
                 <button type="button" className="btn btn-outline-primary" onClick={this.addExpense}><i class="bi bi-plus-circle"></i></button>
             </div>
-            <hr className="mb-5"/>
+            <hr className="mt-2 mb-5"/>
                 <div className="row mb-1">
                     <CascadingDropdown currentUser = {this.activeUser} cardList = {this.state.data} ref={this.sendToTable}/>
                 </div>
