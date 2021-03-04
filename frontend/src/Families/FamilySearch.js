@@ -49,7 +49,7 @@ const FamilySearch = () => {
                             <tr>
                                 <td>{family.familyID}</td>
                                 <td>{family.surname}</td>
-                                <td><button key={family.familyID} type="submit" className="btn btn-outline-success mt-3" onClick={(event, index) => joinFamily(event, family.familyID)}>Join</button></td>
+                                <td><button key={family.familyID} type="submit" className="btn btn btn-outline-success" onClick={(event, index) => joinFamily(event, family.familyID)}>Join</button></td>
                             </tr>)}
                     </tbody>
                 </table>
