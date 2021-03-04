@@ -1,16 +1,24 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+    const user = useSelector(state => state.user)
+    var currentUser = ""
+    if (user.userID == null) {
+        currentUser = "Please log in or register an account first!"
+    }
+    else {
+        currentUser = `Current User: ${user.firstName} ${user.lastName}`
+    }
     return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <div className="container-fluid">
-                    <Link to="/" className="navbar-brand">Expense Tracker</Link>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <div className="container-fluid">
+                <Link to="/" className="navbar-brand">Expense Tracker</Link>
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarNav">
+                </button>
+                <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
                             <Link to="/" className="nav-link active" aria-current="page">Login</Link>
@@ -28,12 +36,16 @@ const Navbar = () => {
                             <Link to="/accountSettings" className="nav-link" aria-current="page">Manage Account</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/admin" className="nav-link" aria-current="page" style={{color: '#ff1a55'}}>Admin Tools</Link>
+                            <Link to="/admin" className="nav-link" aria-current="page" style={{ color: '#ff1a55' }}>Admin Tools</Link>
                         </li>
                     </ul>
-                    </div>
                 </div>
-            </nav>
+                <span class="navbar-text" style={{ color: '#ff1a55' }}>
+                    {currentUser}
+                </span>
+            </div>
+
+        </nav>
     );
 }
 export default Navbar;

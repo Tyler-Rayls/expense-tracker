@@ -95,22 +95,12 @@ class ExpenseTable extends React.Component {
 
     removeExpense(expenseID) {
         if (this.props.currentUser != null) {
-            console.log(this.state.data)
-            console.log(this.state.data.expenseID)
             axios.put("http://flip1.engr.oregonstate.edu:4221/removeExpense", { expenseID: expenseID }).then(res => {
                 alert(res.data.message);
                 this.getTable();
             });
         }
     };
-
-    // editExpense(expenseID) {
-    //     if (this.props.currentUser != null) {
-    //         axios.post("http://flip1.engr.oregonstate.edu:4221/editExpense", { expenseID: expenseID  }).then(res => {
-    //             this.getTable();
-    //         });
-    //     }
-    // };
 
     componentDidMount() {
         this.getTable()

@@ -6,7 +6,8 @@ export const login = (data) => ({
     userID: data.userID,
     firstName: data.firstName,
     lastName: data.lastName,
-    email: data.email
+    email: data.email,
+    password: data.password
 });
 
 export const logout = () => ({
@@ -14,16 +15,17 @@ export const logout = () => ({
 });
 
 const initialState = {
-    userID: 3,
-    firstName: "Elon",
-    lastName: "Musk",
-    email: "elon@tesla.com"
+    userID: null,
+    firstName: null,
+    lastName: null,
+    email: null,
+    password: null
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
         case LOGIN:
-            return {...state, userID: action.userID, firstName: action.firstName, lastName: action.lastName, email: action.email};
+            return {...state, userID: action.userID, firstName: action.firstName, lastName: action.lastName, email: action.email, password: action.password};
         case LOGOUT:
             return initialState;
         default:

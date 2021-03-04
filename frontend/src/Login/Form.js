@@ -11,7 +11,7 @@ const LoginForm = () => {
     const dispatch = useDispatch();
 
     const handleLogin = (data) => {
-        console.log(user.userID);
+        alert("Login successful!")
         dispatch(login(data));
     }
 
