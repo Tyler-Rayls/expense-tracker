@@ -1,6 +1,21 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const Family = (props) => { 
+    const user = useSelector((state) => state.user);
+
+    const leaveFamily = (event) => {
+        event.preventDefault();
+        if (props.head != (user.firstName + " " + user.lastName) || props.members.length == 0) {
+            axios.delete("http://flip1.engr.oregonstate.edu:4221/family/", {data: {props, user}}).then(res => {
+                alert(res.data.message);
+            });
+        } else {
+            alert("Sorry. You can not leave a family that you are the head of while there are still other members in it.");
+        }
+    }
+
     return (
         <div className="col-8 col-md-6 col-lg-4">
             <div className="card mb-3 text-center">
@@ -12,7 +27,7 @@ const Family = (props) => {
                     {props.members?.map(member => <li key={props.familyID + member[1] + 0} className="list-group-item">{member[0]}</li>)}
                 </ul>
                 <div className="card-body">
-                    <button type="button" className="btn btn-outline-danger btn-sm"><i className="bi bi-dash-circle"></i> Leave</button>
+                    <button type="submit" className="btn btn-outline-danger btn-sm" onClick={leaveFamily}><i className="bi bi-dash-circle"></i> Leave</button>
                 </div>
             </div>
         </div>

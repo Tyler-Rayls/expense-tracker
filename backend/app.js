@@ -125,6 +125,22 @@ app.post("/addPaymentMethod", (req, res) => {
     });
 });
 
+app.post("/family/join", (req, res) => {
+    console.log(req.body);
+    var mysql = req.app.get('mysql');
+    var sql = "INSERT INTO FamilyMembers (userID, familyID, isHead) VALUES (?, ?, 0)";
+    var inserts = [req.body.user.userID, req.body.familyID];
+    sql = mysql.pool.query(sql, inserts, function (error, results) {
+        if (error) {
+            var message = "There was an error joining the family.";
+            console.log(error);
+        } else {
+            var message = "You successfully joined the family!";
+        }
+        res.send({ message });
+    });
+});
+
 //Add a new row into Families table
 app.post("/family", (req, res) => {
     var mysql = req.app.get('mysql');
@@ -149,6 +165,19 @@ app.post("/family", (req, res) => {
     })
 });
 
+app.get("/family/search", (req, res) => {
+    var mysql = req.app.get('mysql');
+    var sql = "SELECT * FROM Families WHERE surname LIKE ?;";
+    var inserts = ["%" + req.query.surname + "%"];
+    sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+        var queryResults = [];
+        results.forEach((row) => {
+            queryResults.push(row);
+        });
+        res.send({ queryResults });
+    });
+});
+
 //Select data from Families specific to the current user. 
 app.get("/family", (req, res) => {
     var mysql = req.app.get('mysql');
@@ -164,6 +193,21 @@ app.get("/family", (req, res) => {
             queryResults.push(row)
         });
         res.send(queryResults);
+    });
+});
+
+app.delete("/family", (req, res) => {
+    var mysql = req.app.get('mysql');
+    var sql = "DELETE FROM FamilyMembers WHERE userID = ? AND familyID = ?;";
+    var inserts = [req.body.user.userID, req.body.props.familyID];
+    sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+        var message;
+        if (error) {
+            message = "Unable to remove yourself from the family.";
+        } else {
+            message = "You were successfully removed from the family.";
+        }
+        res.send({message});
     });
 });
 
