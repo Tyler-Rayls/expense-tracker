@@ -33,7 +33,7 @@ app.post("/register", (req, res) => {
 //Select a user from the Users table.
 app.get("/login", (req, res) => {
     var mysql = req.app.get('mysql');
-    var sql = "SELECT userID, email, firstName, lastName FROM Users WHERE email = ? AND password = ?";
+    var sql = "SELECT userID, email, firstName, lastName, password FROM Users WHERE email = ? AND password = ?";
     var inserts = [req.query.email, req.query.password];
     sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
         const queryResults = {};
@@ -45,6 +45,7 @@ app.get("/login", (req, res) => {
             queryResults["email"] = results[0].email;
             queryResults["firstName"] = results[0].firstName;
             queryResults["lastName"] = results[0].lastName;
+            queryResults["password"] = results[0].password;
         };
         res.send(queryResults);
     });
@@ -90,7 +91,6 @@ app.post("/creditCardsForExpenseAndPaymentMethods", (req, res) => {
         results.forEach((row) => {
             queryResults.push(row)
         })
-        console.log(queryResults);
         res.send(queryResults);
     });
 });
@@ -105,7 +105,6 @@ app.post("/paymentMethods", (req, res) => {
         results.forEach((row) => {
             queryResults.push(row)
         })
-        console.log(queryResults)
         res.send(queryResults);
     });
 });
@@ -180,7 +179,6 @@ app.post("/expensesTable", (req, res) => {
         results.forEach((row) => {
             queryResults.push(row)
         })
-        console.log(queryResults);
         res.send(queryResults);
     });
 });
@@ -214,7 +212,6 @@ app.post("/filterMonth", (req, res) => {
         results.forEach((row) => {
             queryResults.push(row)
         })
-        console.log(queryResults);
         res.send(queryResults);
     });
 });
@@ -232,7 +229,6 @@ app.post("/filterCategory", (req, res) => {
         results.forEach((row) => {
             queryResults.push(row)
         })
-        console.log(queryResults);
         res.send(queryResults);
     });
 });
@@ -250,7 +246,6 @@ app.post("/filterCard", (req, res) => {
         results.forEach((row) => {
             queryResults.push(row)
         })
-        console.log(queryResults);
         res.send(queryResults);
     });
 });
@@ -268,6 +263,52 @@ app.put("/removePaymentMethod", (req, res) => {
         res.send({ message });
 })});
 
+app.get("/getUser", (req, res) => {
+    var mysql = req.app.get('mysql');
+    var sql = "SELECT userID, email, firstName, lastName, password FROM Users WHERE userID = ?";
+    var inserts = [req.query.userID];
+    sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+        const queryResults = {};
+        if (error || results[0] == undefined) {
+            queryResults["successful"] = false;
+        } else {
+            queryResults["successful"] = true;
+            queryResults["userID"] = results[0].userID;
+            queryResults["email"] = results[0].email;
+            queryResults["firstName"] = results[0].firstName;
+            queryResults["lastName"] = results[0].lastName;
+            queryResults["password"] = results[0].password;
+        };
+        res.send(queryResults);
+    });
+});
+
+app.put("/deleteUser", (req, res) => {
+    var mysql = req.app.get('mysql')
+    var sql = "DELETE from Users WHERE userID = ?"
+    insert = [req.body.userID]
+    sql = mysql.pool.query(sql, insert, function (error, results, fields) {
+        if (error) {
+            var message = "Error. Please try again."
+        } else {
+            var message = "User removed. Login to a different account or create a new account on the Login page.";
+        }
+        res.send({ message });
+})});
+
+app.put("/editUser", (req, res) => {
+    var mysql = req.app.get('mysql')
+    var sql = "UPDATE Users SET firstName = ?, lastName = ?, email = ?, password = ? WHERE userID = ?"
+    insert = [req.body.firstName, req.body.lastName, req.body.email, req.body.password, req.body.userID]
+    sql = mysql.pool.query(sql, insert, function (error, results, fields) {
+        if (error) {
+            var message = "Error. Please try again."
+        } else {
+            var message = "User edited.";
+        }
+        res.send({ message });
+})});
+
 app.put("/removeExpense", (req, res) => {
     var mysql = req.app.get('mysql')
     var sql = "UPDATE Expenses SET userID = NULL, paymentID = NULL WHERE expenseID = ?"
@@ -280,19 +321,6 @@ app.put("/removeExpense", (req, res) => {
         }
         res.send({ message });
 })});
-
-// app.put("/editExpense", (req, res) => {
-//     var mysql = req.app.get('mysql')
-//     var sql = "UPDATE Expenses SET amount = ?, data = ?, paymentID = ?, category = ?, paymentID = NULL WHERE expenseID = ?"
-//     insert = [req.body.amount, req.body.date, req.body.paymentID, req.body.category, req.body.expenseID]
-//     sql = mysql.pool.query(sql, insert, function (error, results, fields) {
-//         if (error) {
-//             var message = "Error. Please try again."
-//         } else {
-//             var message = "Expense removed.";
-//         }
-//         res.send({ message });
-// })});
 
 app.get("/adminPaymentMethods", (req, res) => {
     var mysql = req.app.get('mysql');
