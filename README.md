@@ -1,5 +1,5 @@
 # Expense Tracker
-Created with [Shane Yen](https://github.com/ShaneYen)
+Created with [Shane Yen](https://github.com/ShaneYen) 
 A simple web application that allows users to track their credit card expenses and rewards. 
 
 ## About the Project
