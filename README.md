@@ -1,9 +1,8 @@
 # Expense Tracker
+>Created with [Shane Yen](https://github.com/ShaneYen)
 A simple web application that allows users to track their credit card expenses and rewards. 
 
 ## About the Project
-Created with [Shane Yen](https://github.com/ShaneYen)
-
 This project was our portfolio assignment for our Intro to Databases course. We were given a simple task to create a database backed website that solves a problem. Financial trackers interested both of us, so we elected to create an expense and reward tracker for our credit cards. 
 
 The project requirements were simple, but we elected to create a more complete package that challenged us. We decided to branch out of our coursework to learn React to further our knowledge of fullstack web development. Learning React was fun and now we have a better understanding of developing component based web applications.
