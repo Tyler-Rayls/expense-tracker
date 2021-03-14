@@ -13,7 +13,7 @@ const Navbar = () => {
         currentUser = `Hello, ${user.firstName}!`
     }
 
-    const loggedIn = (user.userID == null) ? "/" : "accountSettings";
+    const loggedIn = (user.userID == null) ? "/" : "/expenses";
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
