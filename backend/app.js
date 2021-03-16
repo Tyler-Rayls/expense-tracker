@@ -125,7 +125,6 @@ app.post("/addPaymentMethod", (req, res) => {
 });
 
 app.post("/family/join", (req, res) => {
-    console.log(req.body);
     var mysql = req.app.get('mysql');
     var sql = "INSERT INTO FamilyMembers (userID, familyID, isHead) VALUES (?, ?, 0)";
     var inserts = [req.body.user.userID, req.body.familyID];
@@ -392,11 +391,12 @@ app.get("/adminUsers", (req, res) => {
 
 app.get("/rewards", (req, res) => {
     var mysql = req.app.get('mysql');
-    var sql = "SELECT PaymentMethods.paymentID, CreditCards.cardID, CreditCards.dining, CreditCards.gas, CreditCards.grocery, CreditCards.travel, CreditCards.otherReward, CreditCards.annualFee FROM PaymentMethods \
+    var sql = "SELECT PaymentMethods.paymentID, CreditCards.cardName, CreditCards.cardID, CreditCards.dining, CreditCards.gas, CreditCards.grocery, CreditCards.travel, CreditCards.otherReward, CreditCards.annualFee FROM PaymentMethods \
                INNER JOIN CreditCards ON PaymentMethods.cardID = CreditCards.cardID \
                WHERE userID = ?";
     var inserts = [req.query.userID];
     var creditCards = []
+    var data = [];
     sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
         if (error) {
             console.log(error);
@@ -404,9 +404,11 @@ app.get("/rewards", (req, res) => {
             var categories = ["dining", "gas", "grocery", "travel", "otherReward"];
             results.forEach(card => {
                 var card_data = {};
+                card_data.cardName = card.cardName;
                 card_data.cardID = card.cardID;
                 card_data.annualFee = card.annualFee;
-                var totalExpenseForCard = 0;
+                card_data.totalExpense = 0;
+                card_data.totalRewards = 0;
                 categories.forEach(category => {
                     sql = "SELECT SUM(amount) AS Expense FROM Expenses WHERE paymentID = ? AND category = ?;"
                     inserts = [card.paymentID, category];
@@ -414,14 +416,16 @@ app.get("/rewards", (req, res) => {
                         if (error) {
                             console.log(error);
                         } else {
-                            console.log(results);
+                            card_data.totalRewards += results[0].Expense == null ? 0 : (results[0].Expense * card[category] / 100);
+                            card_data.totalExpense += results[0].Expense == null ? 0 : results[0].Expense;
                         }
-                    })
-                })
-            })
+                    });
+                });
+                data.push(card_data);
+            });
         }
     });
-    sql = ""
+    setTimeout(() => { res.send(data); }, 2000);
 });
 
 app.listen(port, () => console.log(`Express is listening on the port ${port}`));
