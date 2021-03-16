@@ -1,3 +1,5 @@
+// Displays all of the Users
+
 import React from 'react';
 import axios from 'axios';
 

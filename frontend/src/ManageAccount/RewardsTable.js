@@ -1,3 +1,5 @@
+// Displays sums of the Expenses related to each of the Users PaymentMethods and calculates the rewards they've gotten from them
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';

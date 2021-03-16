@@ -1,3 +1,5 @@
+// This form allows a user to insert a new user into the Users table
+
 import React, { Component } from 'react';
 import axios from 'axios';
 

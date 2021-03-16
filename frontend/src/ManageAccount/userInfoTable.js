@@ -1,3 +1,5 @@
+// Displays information on the current User and allows them to edit or delete the user
+
 import React from 'react'
 import axios from 'axios';
 

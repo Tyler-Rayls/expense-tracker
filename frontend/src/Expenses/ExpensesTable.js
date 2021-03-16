@@ -1,3 +1,6 @@
+// Displays all of the Expenses related to the current User logged in
+// Allows the user to filter the Expenses
+
 import React from 'react';
 import axios from 'axios';
 
