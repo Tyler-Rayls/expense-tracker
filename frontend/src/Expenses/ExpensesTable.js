@@ -1,3 +1,6 @@
+// Displays all of the Expenses related to the current User logged in
+// Allows the user to filter the Expenses
+
 import React from 'react';
 import axios from 'axios';
 
@@ -21,7 +24,6 @@ class ExpenseTable extends React.Component {
                     userID: this.props.currentUser, //Get unique userID
                 }
             }).then(response => {
-                console.log(response.data)
                 this.setState({ data: response.data })
             })
                 .catch(function (error) {
@@ -42,7 +44,6 @@ class ExpenseTable extends React.Component {
                     month: monthReq
                 }
             }).then(response => {
-                console.log(response.data)
                 this.setState({ data: response.data })
             })
                 .catch(function (error) {
@@ -63,7 +64,6 @@ class ExpenseTable extends React.Component {
                     cardName: card
                 }
             }).then(response => {
-                console.log(response.data)
                 this.setState({ data: response.data })
             })
                 .catch(function (error) {
@@ -84,7 +84,6 @@ class ExpenseTable extends React.Component {
                     category:catReq
                 }
             }).then(response => {
-                console.log(response.data)
                 this.setState({ data: response.data })
             })
                 .catch(function (error) {

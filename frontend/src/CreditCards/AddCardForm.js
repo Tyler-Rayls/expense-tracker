@@ -1,3 +1,5 @@
+// Allows the User to create a new CreditCard
+
 import React from 'react';
 import axios from 'axios';
 import AllPaymentsMethodTable from './AllPaymentMethodsTable';

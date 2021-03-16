@@ -1,3 +1,5 @@
+// Displays (selects) all of the PaymentMethods related to the current User logged in
+
 import React from 'react';
 import axios from 'axios';
 

@@ -1,3 +1,5 @@
+// Allows the User to create a new Expense
+
 import React from 'react';
 import axios from 'axios';
 import CascadingDropdown from './CascadingDropdown';

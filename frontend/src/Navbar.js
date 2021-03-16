@@ -4,25 +4,31 @@ import { useSelector } from 'react-redux';
 
 const Navbar = () => {
     const user = useSelector(state => state.user)
+
     var currentUser = ""
     if (user.userID == null) {
-        currentUser = "Please log in or register an account first!"
+        currentUser = "You are not logged in"
     }
     else {
-        currentUser = `Current User: ${user.firstName} ${user.lastName}`
+        currentUser = `Hello, ${user.firstName}!`
     }
+
+    const loggedIn = (user.userID == null) ? "/" : "/expenses";
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
-                <Link to="/" className="navbar-brand">Expense Tracker</Link>
+                <Link to={loggedIn} className="navbar-brand">Expense Tracker</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
-                        <li className="nav-item">
-                            <Link to="/" className="nav-link active" aria-current="page">Login</Link>
-                        </li>
+                        {user.userID == null &&
+                            <li className="nav-item">
+                                <Link to="/" className="nav-link active" aria-current="page">Login</Link>
+                            </li>
+                        }
                         <li className="nav-item">
                             <Link to="/expenses" className="nav-link" aria-current="page">Expenses</Link>
                         </li>
@@ -40,9 +46,9 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
-                <span class="navbar-text" style={{ color: '#ff1a55' }}>
+                <div class="col-2 d-none text-center d-lg-inline navbar-text">
                     {currentUser}
-                </span>
+                </div>
             </div>
 
         </nav>

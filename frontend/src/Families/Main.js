@@ -1,3 +1,5 @@
+// Displays all of the families the User is in
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';

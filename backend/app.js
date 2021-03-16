@@ -124,8 +124,8 @@ app.post("/addPaymentMethod", (req, res) => {
     });
 });
 
+// Adds a Users <-> Families relationship through the FamilyMembers table
 app.post("/family/join", (req, res) => {
-    console.log(req.body);
     var mysql = req.app.get('mysql');
     var sql = "INSERT INTO FamilyMembers (userID, familyID, isHead) VALUES (?, ?, 0)";
     var inserts = [req.body.user.userID, req.body.familyID];
@@ -164,6 +164,7 @@ app.post("/family", (req, res) => {
     })
 });
 
+// Searches for a family by the last name
 app.get("/family/search", (req, res) => {
     var mysql = req.app.get('mysql');
     var sql = "SELECT * FROM Families WHERE surname LIKE ?;";
@@ -195,6 +196,7 @@ app.get("/family", (req, res) => {
     });
 });
 
+// Deletes a Families <-> Users relationship from the FamilyMembers table
 app.delete("/family", (req, res) => {
     var mysql = req.app.get('mysql');
     var sql = "DELETE FROM FamilyMembers WHERE userID = ? AND familyID = ?;";
@@ -294,6 +296,7 @@ app.post("/filterCard", (req, res) => {
     });
 });
 
+// Removes a Users <-> CreditCards relationship in the PaymentMethods table
 app.delete("/removePaymentMethod", (req, res) => {
     var mysql = req.app.get('mysql')
     var sql = "DELETE from PaymentMethods WHERE paymentID = ?"
@@ -307,6 +310,7 @@ app.delete("/removePaymentMethod", (req, res) => {
         res.send({ message });
 })});
 
+// Gets all the information on a User
 app.get("/getUser", (req, res) => {
     var mysql = req.app.get('mysql');
     var sql = "SELECT userID, email, firstName, lastName, password FROM Users WHERE userID = ?";
@@ -327,6 +331,7 @@ app.get("/getUser", (req, res) => {
     });
 });
 
+// Deletes a user from the Users table
 app.delete("/deleteUser", (req, res) => {
     var mysql = req.app.get('mysql')
     var sql = "DELETE from Users WHERE userID = ?"
@@ -340,6 +345,7 @@ app.delete("/deleteUser", (req, res) => {
         res.send({ message });
 })});
 
+// Edits a user in Users
 app.put("/editUser", (req, res) => {
     var mysql = req.app.get('mysql')
     var sql = "UPDATE Users SET firstName = ?, lastName = ?, email = ?, password = ? WHERE userID = ?"
@@ -353,6 +359,7 @@ app.put("/editUser", (req, res) => {
         res.send({ message });
 })});
 
+// Nullifies the relationship between a User and Expense
 app.put("/removeExpense", (req, res) => {
     var mysql = req.app.get('mysql')
     var sql = "UPDATE Expenses SET userID = NULL, paymentID = NULL WHERE expenseID = ?"
@@ -366,6 +373,7 @@ app.put("/removeExpense", (req, res) => {
         res.send({ message });
 })});
 
+// Displays all of the PaymentMethods for a User
 app.get("/adminPaymentMethods", (req, res) => {
     var mysql = req.app.get('mysql');
     var sql = "SELECT paymentID, userID, cardID from PaymentMethods";
@@ -378,6 +386,7 @@ app.get("/adminPaymentMethods", (req, res) => {
     });
 });
 
+// Displays all the Users for the admin features
 app.get("/adminUsers", (req, res) => {
     var mysql = req.app.get('mysql');
     var sql = "SELECT userID, email, firstName, lastName, password from Users";
@@ -388,6 +397,46 @@ app.get("/adminUsers", (req, res) => {
         });
         res.send(queryResults);
     });
+});
+
+// Calculates the rewards and expense totals for a Users various PaymentMethods
+app.get("/rewards", (req, res) => {
+    var mysql = req.app.get('mysql');
+    var sql = "SELECT PaymentMethods.paymentID, CreditCards.cardName, CreditCards.cardID, CreditCards.dining, CreditCards.gas, CreditCards.grocery, CreditCards.travel, CreditCards.otherReward, CreditCards.annualFee FROM PaymentMethods \
+               INNER JOIN CreditCards ON PaymentMethods.cardID = CreditCards.cardID \
+               WHERE userID = ?";
+    var inserts = [req.query.userID];
+    var creditCards = []
+    var data = [];
+    sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        } else {
+            var categories = ["dining", "gas", "grocery", "travel", "otherReward"];
+            results.forEach(card => {
+                var card_data = {};
+                card_data.cardName = card.cardName;
+                card_data.cardID = card.cardID;
+                card_data.annualFee = card.annualFee;
+                card_data.totalExpense = 0;
+                card_data.totalRewards = 0;
+                categories.forEach(category => {
+                    sql = "SELECT SUM(amount) AS Expense FROM Expenses WHERE paymentID = ? AND category = ?;"
+                    inserts = [card.paymentID, category];
+                    sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            card_data.totalRewards += results[0].Expense == null ? 0 : (results[0].Expense * card[category] / 100);
+                            card_data.totalExpense += results[0].Expense == null ? 0 : results[0].Expense;
+                        }
+                    });
+                });
+                data.push(card_data);
+            });
+        }
+    });
+    setTimeout(() => { res.send(data); }, 2000);
 });
 
 app.listen(port, () => console.log(`Express is listening on the port ${port}`));

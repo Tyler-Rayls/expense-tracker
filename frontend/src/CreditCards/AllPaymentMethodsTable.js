@@ -1,3 +1,5 @@
+// Displays all of the CreditCards in the system
+
 import React from 'react';
 import axios from 'axios';
 
