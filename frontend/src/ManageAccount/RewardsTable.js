@@ -5,11 +5,18 @@ import { useSelector } from 'react-redux';
 const RewardsTable = () => {
     const user = useSelector(state => state.user);
     const [reload, setReload] = useState(0);
+<<<<<<< HEAD
     const [data, setData] = useState([]);
 
     useEffect(() => {
         axios.get("http://flip1.engr.oregonstate.edu:4221/rewards", { params: {userID: user.userID} }).then(res => {
             setData(res.data);
+=======
+
+    useEffect(() => {
+        axios.get("http://flip1.engr.oregonstate.edu:4221/rewards", { params: {userID: user.userID} }).then(res => {
+            console.log(user.userID);
+>>>>>>> 3f1d3d24723762db088a0e57707e4bdcbe733f11
         });
     }, [user, reload]);  
 
