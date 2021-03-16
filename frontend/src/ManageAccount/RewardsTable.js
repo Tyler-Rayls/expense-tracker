@@ -28,10 +28,10 @@ const RewardsTable = () => {
                 {data.map(card => 
                     <tr>
                         <td>{card.cardName}</td>
-                        <td>${card.totalExpense}</td>
-                        <td>${card.totalRewards}</td>
+                        <td>${card.totalExpense.toFixed(2)}</td>
+                        <td>${card.totalRewards.toFixed(2)}</td>
                         <td>${card.annualFee}</td>
-                        <td>${card.totalRewards - card.annualFee}</td>
+                        <td>${(card.totalRewards - card.annualFee).toFixed(2)}</td>
                     </tr>
                 )}
             </tbody>
