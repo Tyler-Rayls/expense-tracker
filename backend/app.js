@@ -390,4 +390,38 @@ app.get("/adminUsers", (req, res) => {
     });
 });
 
+app.get("/rewards", (req, res) => {
+    var mysql = req.app.get('mysql');
+    var sql = "SELECT PaymentMethods.paymentID, CreditCards.cardID, CreditCards.dining, CreditCards.gas, CreditCards.grocery, CreditCards.travel, CreditCards.otherReward, CreditCards.annualFee FROM PaymentMethods \
+               INNER JOIN CreditCards ON PaymentMethods.cardID = CreditCards.cardID \
+               WHERE userID = ?";
+    var inserts = [req.query.userID];
+    var creditCards = []
+    sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+        if (error) {
+            console.log(error);
+        } else {
+            var categories = ["dining", "gas", "grocery", "travel", "otherReward"];
+            results.forEach(card => {
+                var card_data = {};
+                card_data.cardID = card.cardID;
+                card_data.annualFee = card.annualFee;
+                var totalExpenseForCard = 0;
+                categories.forEach(category => {
+                    sql = "SELECT SUM(amount) AS Expense FROM Expenses WHERE paymentID = ? AND category = ?;"
+                    inserts = [card.paymentID, category];
+                    sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log(results);
+                        }
+                    })
+                })
+            })
+        }
+    });
+    sql = ""
+});
+
 app.listen(port, () => console.log(`Express is listening on the port ${port}`));
