@@ -22,14 +22,12 @@ class CascadingDropdown extends React.Component {
 
   handleFilterChange(event) {
     if (event.category == "Payment Method") {
-    console.log(this.props.cardList);
     this.setState({
       filterCategory: event,
       filterValue: "",
       valueList: this.props.cardList,
     })}
     else {
-      console.log(event.values);
       this.setState({
         filterCategory: event,
         filterValue: "",

@@ -11,7 +11,6 @@ const FamilySearch = () => {
         event.preventDefault();
         if (surname != "") {
             axios.get("http://flip1.engr.oregonstate.edu:4221/family/search", { params: {surname} }).then(res => {
-                console.log(res.data.queryResults)
                 setFamilies(res.data.queryResults);
             });
         }

@@ -21,7 +21,6 @@ class ExpenseTable extends React.Component {
                     userID: this.props.currentUser, //Get unique userID
                 }
             }).then(response => {
-                console.log(response.data)
                 this.setState({ data: response.data })
             })
                 .catch(function (error) {
@@ -42,7 +41,6 @@ class ExpenseTable extends React.Component {
                     month: monthReq
                 }
             }).then(response => {
-                console.log(response.data)
                 this.setState({ data: response.data })
             })
                 .catch(function (error) {
@@ -63,7 +61,6 @@ class ExpenseTable extends React.Component {
                     cardName: card
                 }
             }).then(response => {
-                console.log(response.data)
                 this.setState({ data: response.data })
             })
                 .catch(function (error) {
@@ -84,7 +81,6 @@ class ExpenseTable extends React.Component {
                     category:catReq
                 }
             }).then(response => {
-                console.log(response.data)
                 this.setState({ data: response.data })
             })
                 .catch(function (error) {
